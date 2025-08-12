@@ -193,8 +193,263 @@ document.addEventListener('click', function(event) {
 });
 
 // 페이지 로드 시 차트 생성
+// 미션 완료 기능
+function completeMission(button) {
+    const missionItem = button.closest('.mission-item');
+    missionItem.classList.remove('active');
+    missionItem.classList.add('completed');
+    missionItem.querySelector('.mission-check').textContent = '✅';
+    button.remove();
+    
+    // 경험치 애니메이션
+    const progressFill = document.querySelector('.progress-fill');
+    const currentWidth = parseInt(progressFill.style.width || '65');
+    const newWidth = Math.min(currentWidth + 4, 100);
+    progressFill.style.width = newWidth + '%';
+    
+    // 경험치 텍스트 업데이트
+    const progressText = document.querySelector('.progress-text');
+    const currentExp = 650 + (newWidth - 65) * 10;
+    progressText.textContent = `경험치 ${currentExp}/1000`;
+}
+
+// 포트폴리오 상세 페이지 열기
+function openPortfolioDetail() {
+    document.getElementById('portfolioDetailModal').style.display = 'flex';
+}
+
+// 포트폴리오 상세 페이지 닫기
+function closePortfolioDetail() {
+    document.getElementById('portfolioDetailModal').style.display = 'none';
+}
+
+// 포트폴리오 미니 차트 생성
+function createPortfolioMiniChart() {
+    const ctx = document.getElementById('portfolioMiniChart');
+    if (!ctx) return;
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: ['주식', 'ETF', '채권', '기타'],
+            datasets: [{
+                data: [40, 30, 20, 10],
+                backgroundColor: ['#3498db', '#2ecc71', '#f39c12', '#9b59b6'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+// 여성 콘텐츠 전체보기
+function showAllWomenContent() {
+    alert('여성 성장 콘텐츠 전체 페이지로 이동합니다.');
+}
+
+// 리밸런싱 기능
+function rebalanceAll() {
+    alert('포트폴리오 리밸런싱을 시작합니다.');
+}
+
+// 보고서 내보내기
+function exportReport() {
+    alert('포트폴리오 보고서를 다운로드합니다.');
+}
+
+// 미션 배너 기능
+function closeMissionBanner() {
+    const banner = document.querySelector('.mission-event-banner');
+    banner.style.display = 'none';
+}
+
+function openMissionDetail() {
+    alert('상세 미션 페이지로 이동합니다.');
+}
+
+// 여성 콘텐츠 카테고리 전환
+function switchCategory(category) {
+    // 탭 활성화
+    document.querySelectorAll('.cat-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // 콘텐츠 전환
+    document.querySelectorAll('.slider-container').forEach(container => {
+        container.style.display = 'none';
+    });
+    document.getElementById(category + '-content').style.display = 'grid';
+}
+
+// 위젯 드래그 앤 드롭 기능 (Sortable.js 사용)
+let isLayoutEditMode = false;
+let mainSortable = null;
+let sidebarSortable = null;
+
+function toggleLayoutEdit() {
+    isLayoutEditMode = !isLayoutEditMode;
+    const dashboardGrid = document.getElementById('dashboard-widgets');
+    const button = event.target.closest('button');
+    
+    if (isLayoutEditMode) {
+        dashboardGrid.classList.add('layout-edit-mode');
+        button.innerHTML = '<span class="layout-icon">✓</span> 편집 완료';
+        button.style.background = '#4CAF50';
+        enableSortable();
+        showLayoutInstructions();
+    } else {
+        dashboardGrid.classList.remove('layout-edit-mode');
+        button.innerHTML = '<span class="layout-icon">📱</span> 레이아웃 재배치';
+        button.style.background = '#6c757d';
+        disableSortable();
+        hideLayoutInstructions();
+    }
+}
+
+function enableSortable() {
+    const mainContent = document.querySelector('.main-content');
+    const sidebar = document.querySelector('.sidebar');
+    
+    // 메인 콘텐츠 영역 sortable 설정
+    if (mainContent) {
+        mainSortable = new Sortable(mainContent, {
+            group: 'widgets',
+            animation: 150,
+            handle: '.widget-handle',
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            onStart: function(evt) {
+                evt.item.classList.add('dragging');
+            },
+            onEnd: function(evt) {
+                evt.item.classList.remove('dragging');
+                saveWidgetLayout();
+                showToast('위젯 위치가 저장되었습니다!');
+            }
+        });
+    }
+    
+    // 사이드바 영역 sortable 설정
+    if (sidebar) {
+        sidebarSortable = new Sortable(sidebar, {
+            group: 'widgets',
+            animation: 150,
+            handle: '.widget-handle',
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            onStart: function(evt) {
+                evt.item.classList.add('dragging');
+            },
+            onEnd: function(evt) {
+                evt.item.classList.remove('dragging');
+                saveWidgetLayout();
+                showToast('위젯 위치가 저장되었습니다!');
+            }
+        });
+    }
+    
+    // 위젯 핸들 표시
+    document.querySelectorAll('.widget-handle').forEach(handle => {
+        handle.style.opacity = '1';
+    });
+}
+
+function disableSortable() {
+    if (mainSortable) {
+        mainSortable.destroy();
+        mainSortable = null;
+    }
+    
+    if (sidebarSortable) {
+        sidebarSortable.destroy();
+        sidebarSortable = null;
+    }
+    
+    // 위젯 핸들 숨기기
+    document.querySelectorAll('.widget-handle').forEach(handle => {
+        handle.style.opacity = '0';
+    });
+}
+
+function showLayoutInstructions() {
+    const instruction = document.createElement('div');
+    instruction.id = 'layout-instruction';
+    instruction.className = 'layout-instruction';
+    instruction.innerHTML = '📱 위젯을 드래그해서 순서를 바꿔보세요!';
+    instruction.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2563eb;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: fadeIn 0.5s ease;
+    `;
+    document.body.appendChild(instruction);
+    
+    setTimeout(() => {
+        instruction.remove();
+    }, 3000);
+}
+
+function hideLayoutInstructions() {
+    const instruction = document.getElementById('layout-instruction');
+    if (instruction) {
+        instruction.remove();
+    }
+}
+
+function saveWidgetLayout() {
+    const widgets = document.querySelectorAll('.widget-card');
+    const layout = [];
+    widgets.forEach(widget => {
+        layout.push(widget.dataset.widget);
+    });
+    localStorage.setItem('dashboardLayout', JSON.stringify(layout));
+    
+    // 사용자 피드백
+    showToast('레이아웃이 저장되었습니다!');
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+    `;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     createPortfolioChart();
     createGrowthChart();
     updateCalendar();
+    createPortfolioMiniChart();
 });

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지금 - 대시보드</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="dashboard-styles.css">
 </head>
 <body>
@@ -15,6 +16,23 @@
                 <span>💸</span>
                 <span>지금</span>
             </div>
+            
+            <!-- 네비게이션 메뉴 -->
+            <nav class="header-nav">
+                <a href="#dashboard" class="nav-item active">
+                    <span>🏠</span>
+                    <span>대시보드</span>
+                </a>
+                <a href="#detailed-finance" class="nav-item">
+                    <span>📊</span>
+                    <span>상세 금융 관리</span>
+                </a>
+                <a href="#community" class="nav-item">
+                    <span>👥</span>
+                    <span>커뮤니티</span>
+                </a>
+            </nav>
+            
             <div class="user-menu">
                 <div class="user-info">
                     <div class="avatar">김</div>
@@ -25,71 +43,12 @@
         </div>
     </header>
 
+
     <!-- 메인 컨테이너 -->
     <div class="main-container">
-        <!-- 왼쪽 메뉴바 -->
-        <aside class="sidebar-menu">
-            <nav class="menu-nav">
-                <a href="#overview" class="menu-item active">
-                    <span class="menu-icon">🏠</span>
-                    <span>내 현황</span>
-                </a>
-                <a href="#recommended" class="menu-item">
-                    <span class="menu-icon">💰</span>
-                    <span>추천 상품</span>
-                </a>
-                <a href="#dictionary" class="menu-item">
-                    <span class="menu-icon">📖</span>
-                    <span>금융 용어사전</span>
-                </a>
-                <a href="#news" class="menu-item">
-                    <span class="menu-icon">📰</span>
-                    <span>금융 뉴스</span>
-                </a>
-                <a href="#women-policy" class="menu-item">
-                    <span class="menu-icon">🌸</span>
-                    <span>여성 정책</span>
-                </a>
-                <a href="#schedule" class="menu-item">
-                    <span class="menu-icon">📅</span>
-                    <span>일정 관리</span>
-                </a>
-            </nav>
-            
-            <!-- 프리미엄 구독 유도 -->
-            <div class="premium-cta">
-                <div class="premium-icon">💎</div>
-                <h4>프리미엄 회원이 되면</h4>
-                <ul class="premium-benefits">
-                    <li>✅ AI 실시간 알림</li>
-                    <li>✅ 1:1 전문가 상담</li>
-                    <li>✅ 세금 최적화 조언</li>
-                    <li>🔒 모든 기능 해금</li>
-                </ul>
-                <button class="btn-premium" onclick="showPremiumModal()">
-                    프리미엄 구독하기
-                </button>
-            </div>
-        </aside>
         
         <!-- 메인 콘텐츠 -->
         <div class="main-content-area">
-            
-                
-                <!-- 선 그래프와 막대 그래프 -->
-                <div class="independence-charts">
-                    <div class="chart-container">
-                        <h3>📈 자산 성장 추이</h3>
-                        <canvas id="assetGrowthLineChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <h3>📊 월별 저축 현황</h3>
-                        <canvas id="monthlySavingBarChart"></canvas>
-                    </div>
-                </div>
-                
-            </section>
-            
             <!-- 환영 섹션 -->
             <section class="welcome-section">
                 <h1 class="welcome-title">안녕하세요, 커리어 러너님! 👋</h1>
@@ -118,12 +77,262 @@
                 </div>
             </section>
 
+            <section class="daily-mission-section">
+                <div class="mission-header">
+                    <h2 class="mission-title">
+                        <span>🎯</span>
+                        오늘의 금융 미션
+                    </h2>
+                    <div class="mission-streak">
+                        <span class="streak-fire">🔥</span>
+                        <span class="streak-count">7일 연속 달성중!</span>
+                    </div>
+                </div>
+                
+                <!-- 캐릭터 성장 영역 -->
+                <div class="character-growth">
+                    <div class="character-container">
+                        <div class="character-level">Lv.23</div>
+                        <div class="character-avatar">
+                            <div class="character-img">🦸‍♀️</div>
+                            <div class="level-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%;"></div>
+                                </div>
+                                <span class="progress-text">경험치 650/1000</span>
+                            </div>
+                        </div>
+                        <div class="character-name">금융 히어로 김미래</div>
+                        <div class="character-badges">
+                            <span class="badge-earned" title="5일 연속 미션 달성">🏅</span>
+                            <span class="badge-earned" title="첫 투자 성공">💎</span>
+                            <span class="badge-earned" title="절약왕">👑</span>
+                            <span class="badge-locked" title="????">🔒</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 미션 리스트 -->
+                    <div class="mission-list">
+                        <div class="mission-item completed">
+                            <div class="mission-check">✅</div>
+                            <div class="mission-content">
+                                <div class="mission-name">오늘의 시장 뉴스 읽기</div>
+                                <div class="mission-reward">+50 EXP</div>
+                            </div>
+                        </div>
+                        <div class="mission-item completed">
+                            <div class="mission-check">✅</div>
+                            <div class="mission-content">
+                                <div class="mission-name">지출 내역 기록하기</div>
+                                <div class="mission-reward">+30 EXP</div>
+                            </div>
+                        </div>
+                        <div class="mission-item active">
+                            <div class="mission-check">⭕</div>
+                            <div class="mission-content">
+                                <div class="mission-name">투자 포트폴리오 확인</div>
+                                <div class="mission-reward">+40 EXP</div>
+                            </div>
+                            <button class="mission-complete-btn" onclick="completeMission(this)">완료</button>
+                        </div>
+                        <div class="mission-item">
+                            <div class="mission-check">⭕</div>
+                            <div class="mission-content">
+                                <div class="mission-name">금융 용어 1개 학습</div>
+                                <div class="mission-reward">+60 EXP</div>
+                            </div>
+                        </div>
+                        <div class="mission-item bonus">
+                            <div class="mission-check">⭐</div>
+                            <div class="mission-content">
+                                <div class="mission-name">[보너스] 여성 정책 1개 확인</div>
+                                <div class="mission-reward">+100 EXP + 🎁</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 리워드 & 랭킹 -->
+                <div class="rewards-ranking">
+                    <div class="rewards-box">
+                        <h3>🎁 이번주 리워드</h3>
+                        <div class="reward-items">
+                            <div class="reward-item">
+                                <span class="reward-icon">☕</span>
+                                <span class="reward-name">스타벅스 쿠폰</span>
+                                <span class="reward-condition">5일 연속 달성시</span>
+                            </div>
+                            <div class="reward-item">
+                                <span class="reward-icon">📚</span>
+                                <span class="reward-name">금융 도서 할인</span>
+                                <span class="reward-condition">레벨 25 달성시</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ranking-box">
+                        <h3>🏆 주간 랭킹</h3>
+                        <div class="ranking-list">
+                            <div class="ranking-item my-rank">
+                                <span class="rank-num">12</span>
+                                <span class="rank-name">나 (김미래)</span>
+                                <span class="rank-score">2,350점</span>
+                            </div>
+                            <div class="ranking-item">
+                                <span class="rank-num">1</span>
+                                <span class="rank-name">투자여신</span>
+                                <span class="rank-score">4,820점</span>
+                            </div>
+                            <div class="ranking-item">
+                                <span class="rank-num">2</span>
+                                <span class="rank-name">경제박사</span>
+                                <span class="rank-score">4,510점</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 여성 성장 콘텐츠 (컴팩트 버전) -->
+            <section class="women-growth-compact">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span>🌸</span>
+                        여성 성장 콘텐츠
+                    </h2>
+                    <button class="btn-view-all" onclick="showAllWomenContent()">전체보기</button>
+                </div>
+                
+                <!-- 카테고리 탭 -->
+                <div class="category-tabs">
+                    <button class="cat-tab active" onclick="switchCategory('policy')">정책</button>
+                    <button class="cat-tab" onclick="switchCategory('lecture')">강연</button>
+                    <button class="cat-tab" onclick="switchCategory('video')">영상</button>
+                    <button class="cat-tab" onclick="switchCategory('mentoring')">멘토링</button>
+                    <button class="cat-tab" onclick="switchCategory('event')">이벤트</button>
+                </div>
+                
+                <!-- 콘텐츠 슬라이더 -->
+                <div class="content-slider" id="women-content-slider">
+                    <div class="slider-container active" id="policy-content">
+                        <div class="compact-card">
+                            <span class="compact-icon">💼</span>
+                            <div class="compact-info">
+                                <h4>여성 리더십 아카데미</h4>
+                                <p>무료 MBA 과정</p>
+                            </div>
+                            <button class="compact-btn">신청</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">💰</span>
+                            <div class="compact-info">
+                                <h4>경력단절 지원금</h4>
+                                <p>월 30만원 지원</p>
+                            </div>
+                            <button class="compact-btn">신청</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">🏠</span>
+                            <div class="compact-info">
+                                <h4>신혼부부 특별공급</h4>
+                                <p>주택 우선 공급</p>
+                            </div>
+                            <button class="compact-btn">신청</button>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="lecture-content" style="display: none;">
+                        <div class="compact-card">
+                            <span class="compact-icon">🎤</span>
+                            <div class="compact-info">
+                                <h4>Women in Tech 2025</h4>
+                                <p>여성 기술 리더 연설</p>
+                            </div>
+                            <button class="compact-btn">등록</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">📊</span>
+                            <div class="compact-info">
+                                <h4>여성 금융 서밋</h4>
+                                <p>투자 전문가 강연</p>
+                            </div>
+                            <button class="compact-btn">등록</button>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="video-content" style="display: none;">
+                        <div class="compact-card">
+                            <span class="compact-icon">🎥</span>
+                            <div class="compact-info">
+                                <h4>월급 200만원 억대 자산</h4>
+                                <p>당근마켓 언니</p>
+                            </div>
+                            <button class="compact-btn">시청</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">🎥</span>
+                            <div class="compact-info">
+                                <h4>경력단절 재취업 비법</h4>
+                                <p>커리어우먼</p>
+                            </div>
+                            <button class="compact-btn">시청</button>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="mentoring-content" style="display: none;">
+                        <div class="compact-card">
+                            <span class="compact-icon">👩‍🏫</span>
+                            <div class="compact-info">
+                                <h4>1:1 커리어 멘토링</h4>
+                                <p>선배와 함께 성장</p>
+                            </div>
+                            <button class="compact-btn">신청</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">📈</span>
+                            <div class="compact-info">
+                                <h4>투자 전문가 멘토링</h4>
+                                <p>포트폴리오 상담</p>
+                            </div>
+                            <button class="compact-btn">신청</button>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="event-content" style="display: none;">
+                        <div class="compact-card">
+                            <span class="compact-icon">🤝</span>
+                            <div class="compact-info">
+                                <h4>Women in Finance</h4>
+                                <p>금융권 네트워킹</p>
+                            </div>
+                            <button class="compact-btn">참가</button>
+                        </div>
+                        <div class="compact-card">
+                            <span class="compact-icon">🎉</span>
+                            <div class="compact-info">
+                                <h4>여성 창업가 모임</h4>
+                                <p>스타트업 네트워킹</p>
+                            </div>
+                            <button class="compact-btn">참가</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+           <!-- 선 그래프와 막대 그래프 (위치 이동) -->
+                <div class="independence-charts">
+                    <div class="chart-container">
+                        <h3>📈 자산 성장 추이</h3>
+                        <canvas id="assetGrowthLineChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>📊 월별 저축 현황</h3>
+                        <canvas id="monthlySavingBarChart"></canvas>
+                    </div>
+                </div>
+
         <!-- 대시보드 그리드 -->
-        <div class="dashboard-grid">
+        <div class="dashboard-grid" id="dashboard-widgets">
             <!-- 메인 콘텐츠 -->
             <div class="main-content">
                 <!-- 상세 재무 정보 카드 -->
-                <div class="card">
+                <div class="card widget-card" data-widget="financial-status" draggable="false">
+                    <div class="widget-handle">⋮</div>
                     <h2 class="card-title">
                         <span>💰</span>
                         오늘의 손익 현황
@@ -152,112 +361,64 @@
                     </div>
                 </div>
 
-                <!-- 포트폴리오 현황 -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <span>📊</span>
-                        내 포트폴리오 현황
-                    </h2>
-                    <div class="portfolio-chart-container">
-                        <canvas id="portfolioChart"></canvas>
+                <!-- 포트폴리오 요약 (간략화) -->
+                <div class="card widget-card" data-widget="portfolio-summary" draggable="false">
+                    <div class="widget-handle">⋮</div>
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <span>📊</span>
+                            포트폴리오 요약
+                        </h2>
+                        <button class="btn-detail" onclick="openPortfolioDetail()">상세보기 →</button>
                     </div>
-                    <div class="asset-list">
-                        <div class="asset-item">
-                            <div class="asset-info">
-                                <div class="asset-icon" style="background-color: #3498db;"></div>
-                                <span class="asset-name">우량주 적립식</span>
+                    <div class="portfolio-summary">
+                        <div class="summary-stats">
+                            <div class="stat">
+                                <div class="stat-label">총 자산</div>
+                                <div class="stat-value">3,250만원</div>
                             </div>
-                            <div class="asset-value">
-                                <div class="asset-amount">975만원</div>
-                                <div class="asset-change">
-                                    <span class="asset-percentage">30%</span>
-                                    <span class="asset-return positive">+2.1% ↗</span>
-                                </div>
+                            <div class="stat">
+                                <div class="stat-label">오늘 수익률</div>
+                                <div class="stat-value positive">+3.86%</div>
                             </div>
-                        </div>
-                        <div class="asset-item">
-                            <div class="asset-info">
-                                <div class="asset-icon" style="background-color: #e74c3c;"></div>
-                                <span class="asset-name">ISA 계좌</span>
-                            </div>
-                            <div class="asset-value">
-                                <div class="asset-amount">813만원</div>
-                                <div class="asset-change">
-                                    <span class="asset-percentage">25%</span>
-                                    <span class="asset-return positive">+4.7% ↗</span>
-                                </div>
+                            <div class="stat">
+                                <div class="stat-label">월 수익률</div>
+                                <div class="stat-value positive">+12.3%</div>
                             </div>
                         </div>
-                        <div class="asset-item">
-                            <div class="asset-info">
-                                <div class="asset-icon" style="background-color: #2ecc71;"></div>
-                                <span class="asset-name">글로벌 ETF</span>
-                            </div>
-                            <div class="asset-value">
-                                <div class="asset-amount">650만원</div>
-                                <div class="asset-change">
-                                    <span class="asset-percentage">20%</span>
-                                    <span class="asset-return negative">-1.2% ↘</span>
-                                </div>
-                            </div>
+                        <div class="portfolio-mini-chart">
+                            <canvas id="portfolioMiniChart"></canvas>
                         </div>
-                        <div class="asset-item">
-                            <div class="asset-info">
-                                <div class="asset-icon" style="background-color: #f39c12;"></div>
-                                <span class="asset-name">여성리더십 교육</span>
+                    </div>
+                    <div class="top-holdings">
+                        <h4>TOP 3 보유자산</h4>
+                        <div class="holding-list">
+                            <div class="holding-item">
+                                <span class="holding-name">우량주 적립식</span>
+                                <span class="holding-value">975만원</span>
+                                <span class="holding-return positive">+2.1%</span>
                             </div>
-                            <div class="asset-value">
-                                <div class="asset-amount">488만원</div>
-                                <div class="asset-change">
-                                    <span class="asset-percentage">15%</span>
-                                    <span class="asset-return positive">+6.3% ↗</span>
-                                </div>
+                            <div class="holding-item">
+                                <span class="holding-name">ISA 계좌</span>
+                                <span class="holding-value">813만원</span>
+                                <span class="holding-return positive">+4.7%</span>
                             </div>
-                        </div>
-                        <div class="asset-item">
-                            <div class="asset-info">
-                                <div class="asset-icon" style="background-color: #9b59b6;"></div>
-                                <span class="asset-name">로보어드바이저</span>
-                            </div>
-                            <div class="asset-value">
-                                <div class="asset-amount">325만원</div>
-                                <div class="asset-change">
-                                    <span class="asset-percentage">10%</span>
-                                    <span class="asset-return positive">+1.8% ↗</span>
-                                </div>
+                            <div class="holding-item">
+                                <span class="holding-name">글로벌 ETF</span>
+                                <span class="holding-value">650만원</span>
+                                <span class="holding-return negative">-1.2%</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 자산 성장 그래프 (세분화) -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <span>📈</span>
-                        자산 성장 추이
-                    </h2>
-                    
-                    <!-- 보기 옵션 버튼 -->
-                    <div class="view-options">
-                        <button class="view-btn active" onclick="changeGrowthView('portfolio')">포트폴리오별</button>
-                        <button class="view-btn" onclick="changeGrowthView('monthly')">월별</button>
-                        <button class="view-btn" onclick="changeGrowthView('yearly')">년도별</button>
-                    </div>
-                    
-                    <div class="growth-chart-container">
-                        <canvas id="growthChart"></canvas>
-                    </div>
-                    
-                    <div class="chart-legend" id="chartLegend">
-                        <!-- 범례가 여기에 표시됩니다 -->
-                    </div>
-                </div>
             </div>
 
             <!-- 사이드바 -->
             <div class="sidebar">
                 <!-- Todo 캘린더 (위치 바꿜) -->
-                <div class="card">
+                <div class="card widget-card" data-widget="todo-calendar" draggable="false">
+                    <div class="widget-handle">⋮</div>
                     <h2 class="card-title">
                         <span>📅</span>
                         투자 일정 관리
@@ -426,7 +587,8 @@
                 </div>
 
                 <!-- 투자 뉴스 -->
-                <div class="card">
+                <div class="card widget-card" data-widget="investment-news" draggable="false">
+                    <div class="widget-handle">⋮</div>
                     <h2 class="card-title">
                         <span>📰</span>
                         맞춤 투자 뉴스
@@ -460,17 +622,16 @@
         </div>
 
         <!-- 하단 액션 버튼 -->
-        <div class="card">
+        <div class="card widget-card" data-widget="quick-actions" draggable="false">
+            <div class="widget-handle">⋮</div>
             <h2 class="card-title">
                 <span>🚀</span>
                 빠른 액션
             </h2>
             <div class="action-buttons">
-                <button class="btn-action btn-primary" onclick="addInvestment()">
-                    추가 투자하기
-                </button>
-                <button class="btn-action btn-secondary" onclick="rebalancePortfolio()">
-                    포트폴리오 리밸런싱
+                <button class="btn-action btn-secondary" onclick="toggleLayoutEdit()">
+                    <span class="layout-icon">📱</span>
+                    레이아웃 재배치
                 </button>
                 <button class="btn-action btn-premium" onclick="showPremiumFeature()">
                     <span class="lock-icon">🔒</span>
@@ -720,6 +881,147 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 포트폴리오 상세 페이지 모달 -->
+    <div class="modal-overlay" id="portfolioDetailModal" style="display: none;">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>📊 포트폴리오 상세 관리</h2>
+                <button class="modal-close" onclick="closePortfolioDetail()">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- 포트폴리오 요약 정보 -->
+                <div class="portfolio-detail-summary">
+                    <div class="detail-stat-grid">
+                        <div class="detail-stat">
+                            <label>총 투자금액</label>
+                            <value>2,500만원</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>현재 평가금액</label>
+                            <value>3,250만원</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>총 수익률</label>
+                            <value class="positive">+30%</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>연평균 수익률</label>
+                            <value class="positive">+12.3%</value>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 상세 포트폴리오 리스트 -->
+                <div class="portfolio-detail-list">
+                    <h3>💼 자산별 상세 현황</h3>
+                    <table class="portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>자산명</th>
+                                <th>투자금액</th>
+                                <th>현재가치</th>
+                                <th>수익률</th>
+                                <th>비중</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>💵 우량주 적립식</td>
+                                <td>800만원</td>
+                                <td>975만원</td>
+                                <td class="positive">+21.9%</td>
+                                <td>30%</td>
+                                <td>
+                                    <button class="btn-small">리밸런싱</button>
+                                    <button class="btn-small">매도</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🏦 ISA 계좌</td>
+                                <td>700만원</td>
+                                <td>813만원</td>
+                                <td class="positive">+16.1%</td>
+                                <td>25%</td>
+                                <td>
+                                    <button class="btn-small">추가투자</button>
+                                    <button class="btn-small">세부내역</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🌍 글로벌 ETF</td>
+                                <td>600만원</td>
+                                <td>650만원</td>
+                                <td class="positive">+8.3%</td>
+                                <td>20%</td>
+                                <td>
+                                    <button class="btn-small">교체</button>
+                                    <button class="btn-small">분석</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🎓 여성리더십 교육</td>
+                                <td>300만원</td>
+                                <td>488만원</td>
+                                <td class="positive">+62.7%</td>
+                                <td>15%</td>
+                                <td>
+                                    <button class="btn-small">유지</button>
+                                    <button class="btn-small">상세</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🤖 로보어드바이저</td>
+                                <td>200만원</td>
+                                <td>325만원</td>
+                                <td class="positive">+62.5%</td>
+                                <td>10%</td>
+                                <td>
+                                    <button class="btn-small">설정변경</button>
+                                    <button class="btn-small">성과보기</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 포트폴리오 분석 -->
+                <div class="portfolio-analysis">
+                    <h3>📊 포트폴리오 분석</h3>
+                    <div class="analysis-grid">
+                        <div class="analysis-card">
+                            <h4>위험도 분석</h4>
+                            <div class="risk-meter">
+                                <div class="risk-level" style="left: 60%;"></div>
+                            </div>
+                            <p>중간 위험 (60/100)</p>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>분산도</h4>
+                            <div class="diversification-score">B+</div>
+                            <p>양호한 분산 투자</p>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>AI 추천</h4>
+                            <p>"글로벌 ETF 비중을 5% 늘리고 국내 주식을 5% 줄이시면 안정성이 개선됩니다."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 액션 버튼 -->
+                <div class="portfolio-actions">
+                    <button class="btn-action btn-primary" onclick="rebalanceAll()">전체 리밸런싱</button>
+                    <button class="btn-action btn-secondary" onclick="exportReport()">보고서 내보내기</button>
+                    <button class="btn-action btn-premium">
+                        <span class="lock-icon">🔒</span>
+                        AI 자동 최적화
+                        <span class="premium-badge">Premium</span>
+                    </button>
                 </div>
             </div>
         </div>
