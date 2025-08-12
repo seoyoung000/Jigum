@@ -192,7 +192,276 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// 페이지 로드 시 차트 생성
+// 새로운 차트 생성 함수들 추가
+function createAssetGrowthChart() {
+    const ctx = document.getElementById('assetGrowthChart');
+    if (!ctx) return;
+    
+    const data = [2400, 2500, 2650, 2800, 2950, 2850, 3100, 3250, 3180, 3300, 3150, 3250];
+    const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '자산 총액',
+                data: data,
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#3498db',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#3498db',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(context) {
+                            return context.parsed.y.toLocaleString() + '만원';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#6c757d'
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    grid: {
+                        color: '#f8f9fa'
+                    },
+                    ticks: {
+                        color: '#6c757d',
+                        callback: function(value) {
+                            return value.toLocaleString() + '만원';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createMonthlySavingsChart() {
+    const ctx = document.getElementById('monthlySavingsChart');
+    if (!ctx) return;
+    
+    const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+    const savings = [50, 45, 60, 55, 50, 40, 45, 50, 40, 55, 60, 45];
+    const investment = [30, 35, 40, 45, 40, 35, 35, 40, 45, 35, 25, 40];
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '저축',
+                data: savings,
+                backgroundColor: '#2ecc71',
+                borderRadius: 4
+            }, {
+                label: '투자',
+                data: investment,
+                backgroundColor: '#3498db',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end'
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y + '만원';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#6c757d'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#f8f9fa'
+                    },
+                    ticks: {
+                        color: '#6c757d',
+                        callback: function(value) {
+                            return value + '만원';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// 차트 업데이트 함수들
+function updateAssetGrowthChart(period) {
+    const ctx = document.getElementById('assetGrowthChart');
+    if (!ctx) return;
+    
+    // 기존 차트 삭제
+    const existingChart = Chart.getChart(ctx);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    let labels, data;
+    switch(period) {
+        case '6months':
+            labels = ['7월', '8월', '9월', '10월', '11월', '12월'];
+            data = [2800, 2950, 2850, 3100, 3250, 3250];
+            break;
+        case '1year':
+            labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+            data = [2400, 2500, 2650, 2800, 2950, 2850, 3100, 3250, 3180, 3300, 3150, 3250];
+            break;
+        case '2years':
+            labels = ['2023', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4'];
+            data = [1800, 2000, 2200, 2400, 2650, 2800, 3100, 3250];
+            break;
+        case '5years':
+            labels = ['2020', '2021', '2022', '2023', '2024'];
+            data = [800, 1200, 1600, 2200, 3250];
+            break;
+    }
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '자산 총액',
+                data: data,
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#3498db',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '만원';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateSavingsChart(period) {
+    const ctx = document.getElementById('monthlySavingsChart');
+    if (!ctx) return;
+    
+    // 기존 차트 삭제
+    const existingChart = Chart.getChart(ctx);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    let labels, savings, investment;
+    if (period === '6months') {
+        labels = ['7월', '8월', '9월', '10월', '11월', '12월'];
+        savings = [45, 50, 40, 55, 60, 45];
+        investment = [35, 40, 45, 35, 25, 40];
+    } else {
+        labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+        savings = [50, 45, 60, 55, 50, 40, 45, 50, 40, 55, 60, 45];
+        investment = [30, 35, 40, 45, 40, 35, 35, 40, 45, 35, 25, 40];
+    }
+    
+    new Chart(ctx.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '저축',
+                data: savings,
+                backgroundColor: '#2ecc71'
+            }, {
+                label: '투자',
+                data: investment,
+                backgroundColor: '#3498db'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '만원';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 // 미션 완료 기능
 function completeMission(button) {
     const missionItem = button.closest('.mission-item');
@@ -447,9 +716,179 @@ function showToast(message) {
     }, 2000);
 }
 
+// 미션 확장/축소 기능
+function expandMission() {
+    document.getElementById('expandedMissionModal').classList.add('active');
+}
+
+function closeMissionModal() {
+    document.getElementById('expandedMissionModal').classList.remove('active');
+}
+
+// 사이드바 토글 기능
+let sidebarVisible = true;
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('floatingSidebar');
+    const mainContent = document.querySelector('.main-content-area');
+    const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+    
+    sidebarVisible = !sidebarVisible;
+    
+    if (sidebarVisible) {
+        sidebar.classList.remove('hidden');
+        mainContent.classList.remove('sidebar-hidden');
+        toggleBtn.classList.remove('visible');
+    } else {
+        sidebar.classList.add('hidden');
+        mainContent.classList.add('sidebar-hidden');
+        toggleBtn.classList.add('visible');
+    }
+}
+
+// 프리미엄 모달 기능
+function showPremiumModal() {
+    document.getElementById('premiumModal').classList.add('active');
+}
+
+function closePremiumModal() {
+    document.getElementById('premiumModal').classList.remove('active');
+}
+
+// 미션 아코디언 토글 기능
+function toggleMissionAccordion() {
+    const missionSection = document.querySelector('.mission-accordion-section');
+    missionSection.classList.toggle('expanded');
+}
+
+// 여성 콘텐츠 아코디언 토글 기능
+function toggleWomenAccordion() {
+    const womenSection = document.querySelector('.women-growth-accordion');
+    womenSection.classList.toggle('expanded');
+}
+
+// 여성 콘텐츠 카테고리 필터링
+function filterWomenContent(category) {
+    // 모든 탭에서 active 클래스 제거
+    document.querySelectorAll('.cat-tab').forEach(tab => tab.classList.remove('active'));
+    // 클릭한 탭에 active 클래스 추가
+    event.target.classList.add('active');
+    
+    const allCards = document.querySelectorAll('.expanded-card[data-category]');
+    
+    if (category === 'all') {
+        allCards.forEach(card => card.style.display = 'block');
+    } else {
+        allCards.forEach(card => {
+            if (card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+}
+
+// 레이아웃 편집 모드 토글 (모든 섹션 재배치 가능)
+function toggleLayoutEdit() {
+    isLayoutEditMode = !isLayoutEditMode;
+    const mainContent = document.getElementById('sortable-main');
+    const button = event.target.closest('button');
+    
+    if (isLayoutEditMode) {
+        mainContent.classList.add('layout-edit-mode');
+        button.innerHTML = '<span class="layout-icon">✓</span>';
+        button.style.background = '#4CAF50';
+        button.title = '편집 완료';
+        enableMainSortable();
+        showLayoutInstructions();
+    } else {
+        mainContent.classList.remove('layout-edit-mode');
+        button.innerHTML = '<span class="layout-icon">📱</span>';
+        button.style.background = '#6c757d';
+        button.title = '레이아웃 재배치';
+        disableMainSortable();
+        hideLayoutInstructions();
+    }
+}
+
+// 메인 콘텐츠 sortable 활성화
+function enableMainSortable() {
+    const mainContent = document.getElementById('sortable-main');
+    
+    if (mainContent && typeof Sortable !== 'undefined') {
+        if (mainSortable) {
+            mainSortable.destroy();
+        }
+        
+        mainSortable = new Sortable(mainContent, {
+            animation: 150,
+            handle: '.widget-handle',
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            onStart: function(evt) {
+                evt.item.classList.add('dragging');
+            },
+            onEnd: function(evt) {
+                evt.item.classList.remove('dragging');
+                saveMainLayout();
+                showToast('섹션 순서가 저장되었습니다!');
+            }
+        });
+    }
+    
+    // 위젯 핸들 표시
+    document.querySelectorAll('.widget-handle').forEach(handle => {
+        handle.style.opacity = '1';
+    });
+}
+
+// 메인 콘텐츠 sortable 비활성화
+function disableMainSortable() {
+    if (mainSortable) {
+        mainSortable.destroy();
+        mainSortable = null;
+    }
+    
+    // 위젯 핸들 숨기기
+    document.querySelectorAll('.widget-handle').forEach(handle => {
+        handle.style.opacity = '0';
+    });
+}
+
+// 메인 레이아웃 저장
+function saveMainLayout() {
+    const sections = document.querySelectorAll('#sortable-main > [data-widget]');
+    const layout = [];
+    sections.forEach(section => {
+        layout.push(section.dataset.widget);
+    });
+    localStorage.setItem('mainLayout', JSON.stringify(layout));
+}
+
+// 모달 외부 클릭 시 닫기 (기존 기능에 추가)
+document.addEventListener('click', function(event) {
+    const policyModal = document.getElementById('policyModal');
+    const missionModal = document.getElementById('expandedMissionModal');
+    const premiumModal = document.getElementById('premiumModal');
+    
+    if (event.target === policyModal) {
+        closePolicyModal();
+    }
+    if (event.target === missionModal) {
+        closeMissionModal();
+    }
+    if (event.target === premiumModal) {
+        closePremiumModal();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     createPortfolioChart();
     createGrowthChart();
     updateCalendar();
     createPortfolioMiniChart();
+    createAssetGrowthChart();
+    createMonthlySavingsChart();
 });
