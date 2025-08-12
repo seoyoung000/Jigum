@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지금 - 대시보드</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="dashboard-styles.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span>💸</span>
+                <span>지금</span>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="avatar">김</div>
+                    <span>김미래님</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <div class="main-container">
+        <!-- 왼쪽 메뉴바 -->
+        <aside class="sidebar-menu">
+            <nav class="menu-nav">
+                <a href="#overview" class="menu-item active">
+                    <span class="menu-icon">🏠</span>
+                    <span>내 현황</span>
+                </a>
+                <a href="#recommended" class="menu-item">
+                    <span class="menu-icon">💰</span>
+                    <span>추천 상품</span>
+                </a>
+                <a href="#dictionary" class="menu-item">
+                    <span class="menu-icon">📖</span>
+                    <span>금융 용어사전</span>
+                </a>
+                <a href="#news" class="menu-item">
+                    <span class="menu-icon">📰</span>
+                    <span>금융 뉴스</span>
+                </a>
+                <a href="#women-policy" class="menu-item">
+                    <span class="menu-icon">🌸</span>
+                    <span>여성 정책</span>
+                </a>
+                <a href="#schedule" class="menu-item">
+                    <span class="menu-icon">📅</span>
+                    <span>일정 관리</span>
+                </a>
+            </nav>
+            
+            <!-- 프리미엄 구독 유도 -->
+            <div class="premium-cta">
+                <div class="premium-icon">💎</div>
+                <h4>프리미엄 회원이 되면</h4>
+                <ul class="premium-benefits">
+                    <li>✅ AI 실시간 알림</li>
+                    <li>✅ 1:1 전문가 상담</li>
+                    <li>✅ 세금 최적화 조언</li>
+                    <li>🔒 모든 기능 해금</li>
+                </ul>
+                <button class="btn-premium" onclick="showPremiumModal()">
+                    프리미엄 구독하기
+                </button>
+            </div>
+        </aside>
+        
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content-area">
+            
+                
+                <!-- 선 그래프와 막대 그래프 -->
+                <div class="independence-charts">
+                    <div class="chart-container">
+                        <h3>📈 자산 성장 추이</h3>
+                        <canvas id="assetGrowthLineChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>📊 월별 저축 현황</h3>
+                        <canvas id="monthlySavingBarChart"></canvas>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <!-- 환영 섹션 -->
+            <section class="welcome-section">
+                <h1 class="welcome-title">안녕하세요, 커리어 러너님! 👋</h1>
+                <div class="type-badges">
+                            <span class="badge">RLDP</span>
+                            <span class="badge">위험중립</span>
+                            <span class="badge">장기성장</span>
+                            <span class="badge">데이터분석</span>
+                            <span class="badge">수익극대화</span>
+                        </div>
+                <p class="welcome-subtitle">목표 수익률: 8% | 현재 달성률: 12.3%</p>
+                
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">3,250만원</div>
+                        <div class="stat-label">총 자산</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">+12.3%</div>
+                        <div class="stat-label">올해 수익률</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">1.2억원</div>
+                        <div class="stat-label">10년 후 예상자산</div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- 대시보드 그리드 -->
+        <div class="dashboard-grid">
+            <!-- 메인 콘텐츠 -->
+            <div class="main-content">
+                <!-- 상세 재무 정보 카드 -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>💰</span>
+                        오늘의 손익 현황
+                    </h2>
+                    <div class="financial-summary">
+                        <div class="summary-item profit">
+                            <div class="summary-label">오늘 수익</div>
+                            <div class="summary-value">+125,300원</div>
+                            <div class="summary-percent">+3.86%</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">이번주 수익</div>
+                            <div class="summary-value">+482,100원</div>
+                            <div class="summary-percent">+14.83%</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">배당금 예정</div>
+                            <div class="summary-value">85,000원</div>
+                            <div class="summary-date">12월 15일</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">절세 효과</div>
+                            <div class="summary-value">-72,000원</div>
+                            <div class="summary-badge">ISA 혜택</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 포트폴리오 현황 -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>📊</span>
+                        내 포트폴리오 현황
+                    </h2>
+                    <div class="portfolio-chart-container">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                    <div class="asset-list">
+                        <div class="asset-item">
+                            <div class="asset-info">
+                                <div class="asset-icon" style="background-color: #3498db;"></div>
+                                <span class="asset-name">우량주 적립식</span>
+                            </div>
+                            <div class="asset-value">
+                                <div class="asset-amount">975만원</div>
+                                <div class="asset-change">
+                                    <span class="asset-percentage">30%</span>
+                                    <span class="asset-return positive">+2.1% ↗</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-item">
+                            <div class="asset-info">
+                                <div class="asset-icon" style="background-color: #e74c3c;"></div>
+                                <span class="asset-name">ISA 계좌</span>
+                            </div>
+                            <div class="asset-value">
+                                <div class="asset-amount">813만원</div>
+                                <div class="asset-change">
+                                    <span class="asset-percentage">25%</span>
+                                    <span class="asset-return positive">+4.7% ↗</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-item">
+                            <div class="asset-info">
+                                <div class="asset-icon" style="background-color: #2ecc71;"></div>
+                                <span class="asset-name">글로벌 ETF</span>
+                            </div>
+                            <div class="asset-value">
+                                <div class="asset-amount">650만원</div>
+                                <div class="asset-change">
+                                    <span class="asset-percentage">20%</span>
+                                    <span class="asset-return negative">-1.2% ↘</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-item">
+                            <div class="asset-info">
+                                <div class="asset-icon" style="background-color: #f39c12;"></div>
+                                <span class="asset-name">여성리더십 교육</span>
+                            </div>
+                            <div class="asset-value">
+                                <div class="asset-amount">488만원</div>
+                                <div class="asset-change">
+                                    <span class="asset-percentage">15%</span>
+                                    <span class="asset-return positive">+6.3% ↗</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-item">
+                            <div class="asset-info">
+                                <div class="asset-icon" style="background-color: #9b59b6;"></div>
+                                <span class="asset-name">로보어드바이저</span>
+                            </div>
+                            <div class="asset-value">
+                                <div class="asset-amount">325만원</div>
+                                <div class="asset-change">
+                                    <span class="asset-percentage">10%</span>
+                                    <span class="asset-return positive">+1.8% ↗</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자산 성장 그래프 (세분화) -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>📈</span>
+                        자산 성장 추이
+                    </h2>
+                    
+                    <!-- 보기 옵션 버튼 -->
+                    <div class="view-options">
+                        <button class="view-btn active" onclick="changeGrowthView('portfolio')">포트폴리오별</button>
+                        <button class="view-btn" onclick="changeGrowthView('monthly')">월별</button>
+                        <button class="view-btn" onclick="changeGrowthView('yearly')">년도별</button>
+                    </div>
+                    
+                    <div class="growth-chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-legend" id="chartLegend">
+                        <!-- 범례가 여기에 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사이드바 -->
+            <div class="sidebar">
+                <!-- Todo 캘린더 (위치 바꿜) -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>📅</span>
+                        투자 일정 관리
+                    </h2>
+                    <div class="todo-calendar">
+                        <div class="calendar-header">
+                            <div class="calendar-month">2025년 1월</div>
+                            <div class="calendar-nav">
+                                <button onclick="previousMonth()">‹</button>
+                                <button onclick="nextMonth()">›</button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day-header">일</div>
+                            <div class="calendar-day-header">월</div>
+                            <div class="calendar-day-header">화</div>
+                            <div class="calendar-day-header">수</div>
+                            <div class="calendar-day-header">목</div>
+                            <div class="calendar-day-header">금</div>
+                            <div class="calendar-day-header">토</div>
+                            <!-- 달력 날짜들 -->
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day today">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day has-todo">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day has-todo">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day has-todo">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day has-todo">28</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                        </div>
+                        <div class="todo-list">
+                            <div class="todo-item">
+                                <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
+                                <div class="todo-text">포트폴리오 리밸런싱 검토</div>
+                                <div class="todo-date">1/12</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="todo-checkbox checked" onclick="toggleTodo(this)"></div>
+                                <div class="todo-text completed">월간 투자 보고서 확인</div>
+                                <div class="todo-date">1/15</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
+                                <div class="todo-text">세금우대 계좌 한도 확인</div>
+                                <div class="todo-date">1/20</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
+                                <div class="todo-text">여성 리더십 아카데미 신청</div>
+                                <div class="todo-date">1/28</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 여성 정책/콘텐츠 추천 (위치 바꿜 & 내용 확장) -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>🌸</span>
+                        여성 성장 콘텐츠
+                    </h2>
+                    
+                    <!-- 탭 메뉴 -->
+                    <div class="content-tabs">
+                        <button class="tab-btn active" onclick="showContentTab('policy')">정책</button>
+                        <button class="tab-btn" onclick="showContentTab('conference')">컨퍼런스</button>
+                        <button class="tab-btn" onclick="showContentTab('youtube')">영상</button>
+                        <button class="tab-btn" onclick="showContentTab('career')">커리어</button>
+                    </div>
+                    
+                    <!-- 정책 탭 -->
+                    <div class="content-tab-panel active" id="policy-tab">
+                        <div class="policy-summary">
+                            <div class="policy-count">총 <strong>12개</strong> 정책 이용 가능</div>
+                            <button class="btn-view-all" onclick="showPolicyModal()">전체 보기</button>
+                        </div>
+                        <div class="policy-card active">
+                            <div class="policy-title">💼 여성 리더십 아카데미</div>
+                            <div class="policy-desc">무료 MBA 과정 지원</div>
+                            <div class="policy-deadline">📅 마감: 2025.02.28</div>
+                            <button class="btn-apply">신청하기</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 컨퍼런스 탭 -->
+                    <div class="content-tab-panel" id="conference-tab">
+                        <div class="conference-item">
+                            <div class="conf-date">📅 1월 25일</div>
+                            <div class="conf-title">Women in Tech 2025</div>
+                            <div class="conf-desc">여성 기술 리더들의 네트워킹</div>
+                            <button class="btn-register">등록하기</button>
+                        </div>
+                        <div class="conference-item">
+                            <div class="conf-date">📅 2월 10일</div>
+                            <div class="conf-title">여성 금융 서밋</div>
+                            <div class="conf-desc">투자와 재테크 전문가 강연</div>
+                            <button class="btn-register">등록하기</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 유튜브 탭 -->
+                    <div class="content-tab-panel" id="youtube-tab">
+                        <div class="youtube-item">
+                            <div class="yt-thumbnail">🎥</div>
+                            <div class="yt-content">
+                                <div class="yt-title">월급 200만원으로 억대 자산 만든 비법</div>
+                                <div class="yt-channel">당근마켓 언니</div>
+                                <div class="yt-views">조회수 15만회</div>
+                            </div>
+                        </div>
+                        <div class="youtube-item">
+                            <div class="yt-thumbnail">🎥</div>
+                            <div class="yt-content">
+                                <div class="yt-title">경력단절 후 재취업 성공기</div>
+                                <div class="yt-channel">커리어우먼</div>
+                                <div class="yt-views">조회수 8만회</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 커리어 탭 -->
+                    <div class="content-tab-panel" id="career-tab">
+                        <div class="career-item">
+                            <div class="career-icon">🎓</div>
+                            <div class="career-content">
+                                <div class="career-title">무료 코딩 부트캠프</div>
+                                <div class="career-provider">Google for Women</div>
+                                <button class="btn-apply">지원하기</button>
+                            </div>
+                        </div>
+                        <div class="career-item">
+                            <div class="career-icon">💼</div>
+                            <div class="career-content">
+                                <div class="career-title">여성 리더십 멘토링</div>
+                                <div class="career-provider">삼성 Dream Class</div>
+                                <button class="btn-apply">지원하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 투자 뉴스 -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <span>📰</span>
+                        맞춤 투자 뉴스
+                    </h2>
+                    <div class="news-item">
+                        <div class="news-icon">📊</div>
+                        <div class="news-content">
+                            <div class="news-title">삼성전자 실적 발표 앞두고 주가 상승</div>
+                            <div class="news-desc">4분기 반도체 수요 회복으로 긍정적 전망</div>
+                            <div class="news-time">2시간 전</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-icon">💰</div>
+                        <div class="news-content">
+                            <div class="news-title">2025 청년도약계좌 신청 마감 임박</div>
+                            <div class="news-desc">정부 기여금 혜택 놓치지 마세요</div>
+                            <div class="news-time">5시간 전</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-icon">🌐</div>
+                        <div class="news-content">
+                            <div class="news-title">글로벌 ETF 추천 종목 업데이트</div>
+                            <div class="news-desc">미국 S&P500 ETF 비중 조정 권장</div>
+                            <div class="news-time">1일 전</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 액션 버튼 -->
+        <div class="card">
+            <h2 class="card-title">
+                <span>🚀</span>
+                빠른 액션
+            </h2>
+            <div class="action-buttons">
+                <button class="btn-action btn-primary" onclick="addInvestment()">
+                    추가 투자하기
+                </button>
+                <button class="btn-action btn-secondary" onclick="rebalancePortfolio()">
+                    포트폴리오 리밸런싱
+                </button>
+                <button class="btn-action btn-premium" onclick="showPremiumFeature()">
+                    <span class="lock-icon">🔒</span>
+                    AI 실시간 분석
+                    <span class="premium-badge">Premium</span>
+                </button>
+                <button class="btn-action btn-premium" onclick="showPremiumFeature()">
+                    <span class="lock-icon">🔒</span>
+                    1:1 전문가 상담
+                    <span class="premium-badge">Premium</span>
+                </button>
+            </div>
+            
+            <!-- 프리미엄 구독 유도 배너 -->
+            <div class="premium-banner">
+                <div class="banner-content">
+                    <div class="banner-icon">💎</div>
+                    <div class="banner-text">
+                        <h3>프리미엄 구독하면 열려요~</h3>
+                        <p>현질 유도! 모든 기능 언락 & 실시간 AI 분석</p>
+                        <ul class="premium-features">
+                            <li>✅ 실시간 주식 시세 알림</li>
+                            <li>✅ 개인 맞춤 포트폴리오 설계</li>
+                            <li>✅ 세금 최적화 컨설팅</li>
+                            <li>✅ VIP 전용 커뮤니티</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="btn-subscribe" onclick="subscribePremium()">
+                    🔥 지금 구독하고 50% 할인받기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 여성 정책 모달 -->
+    <div class="modal-overlay" id="policyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎯 2025 여성 정책 전체 보기</h3>
+                <button class="modal-close" onclick="closePolicyModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-grid">
+                    <div class="policy-modal-card">
+                        <div class="policy-update-badge">🆕 업데이트</div>
+                        <div class="policy-modal-title">💼 여성 리더십 아카데미</div>
+                        <div class="policy-modal-desc">무료 MBA 과정으로 커리어 업그레이드를 지원합니다. 경영, 리더십, 투자 등 전문 과정 제공</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">무료 (4천만원 상당)</span>
+                            <span class="policy-status deadline-soon">마감임박</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 234개</span>
+                            </div>
+                            <div class="review-content">
+                                "덕분에 연봉이 30% 올랐어요! 최고의 프로그램!" - 김OO님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">💰 경력단절예방 지원금</div>
+                        <div class="policy-modal-desc">육아, 결혼 등으로 인한 경력단절을 예방하기 위해 월 30만원을 최대 1년간 지원</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">월 30만원 × 12개월</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 567개</span>
+                            </div>
+                            <div class="review-content">
+                                "육아하면서도 경제활동 할 수 있어서 정말 감사해요" - 박OO님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🏢 여성기업 창업지원</div>
+                        <div class="policy-modal-desc">여성 창업자를 위한 저금리 대출 및 창업 교육 프로그램 지원</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">최대 1억원 (연 1.5%)</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 789개</span>
+                            </div>
+                            <div class="review-content">
+                                "온라인 쇼핑몰 창업 성공! 정말 든든한 지원이었어요" - 윤○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🏠 신혼부부 특별공급</div>
+                        <div class="policy-modal-desc">생애최초 주택 구입 시 85㎡ 이하 아파트 우선 공급 혜택</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">시세 대비 20% 할인</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 1,456개</span>
+                            </div>
+                            <div class="review-content">
+                                "시세보다 훨씬 저렴하게 내 집 마련했어요! 감사합니다" - 조○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">👶 첫만남이용권</div>
+                        <div class="policy-modal-desc">출생신고 시 아이 1명당 200만원 바우처 지급</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">200만원 바우처</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 3,241개</span>
+                            </div>
+                            <div class="review-content">
+                                "육아용품 구매에 큰 도움이 됐어요. 절차도 간단해요" - 한○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🎓 고등교육 학자금</div>
+                        <div class="policy-modal-desc">여성 재교육을 위한 학자금 대출 특별 금리 적용</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">연 1.7% 특별금리</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 445개</span>
+                            </div>
+                            <div class="review-content">
+                                "40대에 대학원 진학했는데 부담 없이 공부할 수 있어요" - 서○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">💻 여성 IT 교육</div>
+                        <div class="policy-modal-desc">코딩, 데이터분석 등 IT 분야 무료 교육 및 취업 연계</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">무료 (취업 성공시 200만원)</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 892개</span>
+                            </div>
+                            <div class="review-content">
+                                "비전공자도 쉽게 배울 수 있어요. IT 회사 취업 성공!" - 김○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">⚖️ 일·생활 균형</div>
+                        <div class="policy-modal-desc">유연근무제 도입 기업에 대한 인센티브 및 지원금</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">기업당 최대 500만원</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 356개</span>
+                            </div>
+                            <div class="review-content">
+                                "재택근무 덕분에 육아와 일 모두 잡았어요!" - 오○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🛡️ 여성안전 주택</div>
+                        <div class="policy-modal-desc">1인 여성 가구를 위한 안전 주택 임대료 지원</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">월 임대료 50% 지원</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 678개</span>
+                            </div>
+                            <div class="review-content">
+                                "안전 시스템이 완벽하고 주변 시설도 좋아요!" - 노○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🚗 출산·육아 택시</div>
+                        <div class="policy-modal-desc">임신부 및 영유아 동반 시 택시비 50% 할인 쿠폰</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">월 10만원 한도</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 1,234개</span>
+                            </div>
+                            <div class="review-content">
+                                "임신 중이라 이동이 힘든데 정말 큰 도움되어요" - 임○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">📈 여성 금융교육</div>
+                        <div class="policy-modal-desc">투자, 재테크 전문 교육과정 무료 제공 및 자격증 취득 지원</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">무료 (자격증비 10만원 지원)</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 567개</span>
+                            </div>
+                            <div class="review-content">
+                                "금융관리사 1급 합격! 이해하기 쉽게 설명해주세요" - 배○○님
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-modal-card">
+                        <div class="policy-modal-title">🌿 경력복귀 지원</div>
+                        <div class="policy-modal-desc">경력단절 여성의 재취업을 위한 맞춤형 직업훈련 및 취업알선</div>
+                        <div class="policy-modal-details">
+                            <span class="policy-amount">훈련비 100% + 취업성공수당</span>
+                            <span class="policy-status available">신청가능</span>
+                        </div>
+                        <div class="policy-review">
+                            <div class="review-header">
+                                <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="review-count">리뷰 823개</span>
+                            </div>
+                            <div class="review-content">
+                                "8년 만에 사회복귀! 칼위일링과 면접에 대한 도움이 컸어요" - 전○○님
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard-script.js"></script>
+</body>
+</html>
