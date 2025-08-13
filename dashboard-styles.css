@@ -168,21 +168,39 @@ body {
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 15px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 5px;
+    order: 2;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.stat-value.positive-return {
+    color: #16a34a;
+}
+
+.stat-value.negative-return {
+    color: #dc2626;
 }
 
 .stat-label {
-    font-size: 14px;
-    opacity: 0.9;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    order: 1;
+    color: #64748b;
 }
 
 .dashboard-grid {
