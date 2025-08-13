@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 금융 관리 - 여성 투자 플랫폼</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span>💸</span>
+                <span>지금</span>
+            </div>
+            
+            <!-- 네비게이션 메뉴 -->
+            <nav class="header-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span>🏠</span>
+                    <span>대시보드</span>
+                </a>
+                <a href="detailed-finance.html" class="nav-item active">
+                    <span>📊</span>
+                    <span>상세 금융 관리</span>
+                </a>
+                <a href="community.html" class="nav-item">
+                    <span>👥</span>
+                    <span>커뮤니티</span>
+                </a>
+            </nav>
+            
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="avatar">김</div>
+                    <span>김지현님</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-container">
+        <div class="detailed-finance-container">
+            <div class="finance-header">
+                <h1 class="finance-title">📊 상세 금융 관리</h1>
+                <button class="btn-back" onclick="location.href='dashboard.html'">← 대시보드로 돌아가기</button>
+            </div>
+            
+            <!-- 포트폴리오 상세 관리 섹션 -->
+            <div class="portfolio-detail-section">
+                <div class="section-header">
+                    <h2>💼 포트폴리오 상세 관리</h2>
+                    <div class="detail-actions">
+                        <button class="btn-action btn-primary" onclick="rebalanceAll()">전체 리밸런싱</button>
+                        <button class="btn-action btn-secondary" onclick="exportReport()">보고서 내보내기</button>
+                    </div>
+                </div>
+                
+                <!-- 포트폴리오 요약 정보 -->
+                <div class="portfolio-detail-summary">
+                    <div class="detail-stat-grid">
+                        <div class="detail-stat">
+                            <label>총 투자금액</label>
+                            <value>2,500만원</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>현재 평가금액</label>
+                            <value>3,250만원</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>총 수익률</label>
+                            <value class="positive">+30%</value>
+                        </div>
+                        <div class="detail-stat">
+                            <label>연평균 수익률</label>
+                            <value class="positive">+12.3%</value>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 상세 포트폴리오 리스트 -->
+                <div class="portfolio-detail-list">
+                    <h3>💼 자산별 상세 현황</h3>
+                    <table class="portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>자산명</th>
+                                <th>투자금액</th>
+                                <th>현재가치</th>
+                                <th>수익률</th>
+                                <th>비중</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>💵 우량주 적립식</td>
+                                <td>800만원</td>
+                                <td>975만원</td>
+                                <td class="positive">+21.9%</td>
+                                <td>30%</td>
+                                <td>
+                                    <button class="btn-small">리밸런싱</button>
+                                    <button class="btn-small">매도</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🏦 ISA 계좌</td>
+                                <td>700만원</td>
+                                <td>813만원</td>
+                                <td class="positive">+16.1%</td>
+                                <td>25%</td>
+                                <td>
+                                    <button class="btn-small">추가투자</button>
+                                    <button class="btn-small">세부내역</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🌍 글로벌 ETF</td>
+                                <td>600만원</td>
+                                <td>650만원</td>
+                                <td class="positive">+8.3%</td>
+                                <td>20%</td>
+                                <td>
+                                    <button class="btn-small">교체</button>
+                                    <button class="btn-small">분석</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🎓 여성리더십 교육</td>
+                                <td>300만원</td>
+                                <td>488만원</td>
+                                <td class="positive">+62.7%</td>
+                                <td>15%</td>
+                                <td>
+                                    <button class="btn-small">유지</button>
+                                    <button class="btn-small">상세</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🤖 로보어드바이저</td>
+                                <td>200만원</td>
+                                <td>325만원</td>
+                                <td class="positive">+62.5%</td>
+                                <td>10%</td>
+                                <td>
+                                    <button class="btn-small">설정변경</button>
+                                    <button class="btn-small">성과보기</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 포트폴리오 분석 -->
+                <div class="portfolio-analysis">
+                    <h3>📊 포트폴리오 분석</h3>
+                    <div class="analysis-grid">
+                        <div class="analysis-card">
+                            <h4>위험도 분석</h4>
+                            <div class="risk-meter">
+                                <div class="risk-level" style="left: 60%;"></div>
+                            </div>
+                            <p>중간 위험 (60/100)</p>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>분산도</h4>
+                            <div class="diversification-score">B+</div>
+                            <p>양호한 분산 투자</p>
+                        </div>
+                        <div class="analysis-card">
+                            <h4>AI 추천</h4>
+                            <p>"글로벌 ETF 비중을 5% 늘리고 국내 주식을 5% 줄이시면 안정성이 개선됩니다."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 포트폴리오 간편 조정 -->
+            <div class="portfolio-adjustment-section">
+                <div class="section-header">
+                    <h2>⚡ 포트폴리오 간편 조정</h2>
+                    <div class="adjustment-mode-toggle">
+                        <button class="btn-toggle active" onclick="setAdjustmentMode('percentage')">비율 조정</button>
+                        <button class="btn-toggle" onclick="setAdjustmentMode('amount')">금액 조정</button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-sliders">
+                    <div class="slider-item">
+                        <div class="slider-header">
+                            <span class="asset-name">💵 우량주 적립식</span>
+                            <span class="asset-value" id="stock-value">30% (975만원)</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="50" value="30" class="portfolio-slider" id="stock-slider" 
+                                   onchange="updatePortfolioAllocation('stock', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-header">
+                            <span class="asset-name">🏦 ISA 계좌</span>
+                            <span class="asset-value" id="isa-value">25% (813만원)</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="50" value="25" class="portfolio-slider" id="isa-slider"
+                                   onchange="updatePortfolioAllocation('isa', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-header">
+                            <span class="asset-name">🌍 글로벌 ETF</span>
+                            <span class="asset-value" id="etf-value">20% (650만원)</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="50" value="20" class="portfolio-slider" id="etf-slider"
+                                   onchange="updatePortfolioAllocation('etf', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-header">
+                            <span class="asset-name">🎓 여성리더십 교육</span>
+                            <span class="asset-value" id="leadership-value">15% (488만원)</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="30" value="15" class="portfolio-slider" id="leadership-slider"
+                                   onchange="updatePortfolioAllocation('leadership', this.value)">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-header">
+                            <span class="asset-name">🤖 로보어드바이저</span>
+                            <span class="asset-value" id="robo-value">10% (325만원)</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="30" value="10" class="portfolio-slider" id="robo-slider"
+                                   onchange="updatePortfolioAllocation('robo', this.value)">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="adjustment-summary">
+                    <div class="summary-info">
+                        <span>총 비율: <span id="total-percentage">100%</span></span>
+                        <span>예상 수익률: <span id="expected-return">+12.8%</span></span>
+                        <span>위험도: <span id="risk-level">중간</span></span>
+                    </div>
+                    <div class="adjustment-actions">
+                        <button class="btn-action btn-secondary" onclick="resetPortfolio()">원래대로</button>
+                        <button class="btn-action btn-primary" onclick="previewRebalancing()">리밸런싱 미리보기</button>
+                        <button class="btn-action btn-premium" onclick="showPremiumModal()">
+                            <span class="lock-icon">🔒</span>
+                            AI 최적화
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI 분석 및 추천 -->
+            <div class="ai-analysis-section">
+                <div class="section-header">
+                    <h2>🤖 AI 포트폴리오 분석</h2>
+                    <button class="btn-refresh" onclick="refreshAIAnalysis()">분석 새로고침</button>
+                </div>
+                
+                <div class="ai-cards-grid">
+                    <div class="ai-card risk-analysis">
+                        <div class="ai-card-header">
+                            <span class="ai-icon">⚠️</span>
+                            <h3>위험도 분석</h3>
+                            <span class="ai-score good">B+</span>
+                        </div>
+                        <div class="ai-content">
+                            <p>현재 포트폴리오는 <strong>중간 위험도</strong>로 안정적입니다.</p>
+                            <div class="ai-recommendation">
+                                <span class="rec-icon">💡</span>
+                                <span>글로벌 ETF 비중을 5% 늘리면 분산 효과가 개선됩니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-card performance-analysis">
+                        <div class="ai-card-header">
+                            <span class="ai-icon">📈</span>
+                            <h3>성과 분석</h3>
+                            <span class="ai-score excellent">A</span>
+                        </div>
+                        <div class="ai-content">
+                            <p>KOSPI 대비 <strong>+4.2% 초과수익</strong>을 달성했습니다.</p>
+                            <div class="ai-recommendation">
+                                <span class="rec-icon">🎯</span>
+                                <span>현재 투자 전략을 유지하되, 연말 세금 최적화를 고려하세요.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-card market-timing">
+                        <div class="ai-card-header">
+                            <span class="ai-icon">⏰</span>
+                            <h3>시장 타이밍</h3>
+                            <span class="ai-score warning">C</span>
+                        </div>
+                        <div class="ai-content">
+                            <p>현재는 <strong>관망 시기</strong>입니다. 급매수는 피하세요.</p>
+                            <div class="ai-recommendation">
+                                <span class="rec-icon">📊</span>
+                                <span>3개월 내 시장 조정 가능성이 30% 있습니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-card premium-feature">
+                        <div class="ai-card-header">
+                            <span class="ai-icon">🔒</span>
+                            <h3>프리미엄 AI 분석</h3>
+                            <span class="ai-score premium">PRO</span>
+                        </div>
+                        <div class="ai-content premium-locked">
+                            <p>더 정확한 AI 분석과 자동 리밸런싱</p>
+                            <button class="btn-upgrade" onclick="showPremiumModal()">업그레이드</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 추가적인 상세 관리 기능들 -->
+            <div class="additional-finance-tools">
+                <div class="finance-tool-grid">
+                    <div class="finance-tool-card" onclick="showPerformanceAnalysis()">
+                        <h3>📈 성과 분석</h3>
+                        <p>월별, 연별 수익률 추이와 벤치마크 대비 성과를 분석합니다.</p>
+                        <button class="btn-tool">성과 분석 보기</button>
+                    </div>
+                    <div class="finance-tool-card" onclick="showTaxOptimization()">
+                        <h3>💰 세금 최적화</h3>
+                        <p>절세 효과를 극대화할 수 있는 투자 전략을 제안합니다.</p>
+                        <button class="btn-tool">절세 가이드</button>
+                    </div>
+                    <div class="finance-tool-card" onclick="showRiskManagement()">
+                        <h3>📊 리스크 관리</h3>
+                        <p>포트폴리오의 위험도를 체크하고 조정 방안을 제시합니다.</p>
+                        <button class="btn-tool">리스크 체크</button>
+                    </div>
+                    <div class="finance-tool-card" onclick="showGoalManagement()">
+                        <h3>🎯 목표 설정</h3>
+                        <p>투자 목표와 현재 진행 상황을 관리합니다.</p>
+                        <button class="btn-tool">목표 관리</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 프리미엄 모달 -->
+    <div class="modal-overlay" id="premiumModal">
+        <div class="modal-content modal-medium">
+            <div class="modal-header">
+                <h3>💎 프리미엄 업그레이드</h3>
+                <button class="modal-close" onclick="closePremiumModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="premium-upgrade-content">
+                    <div class="premium-icon-large">🔒</div>
+                    <h4>프리미엄 기능을 활성화하세요</h4>
+                    <p>AI 기반 자동 리밸런싱과 고급 분석 기능을 이용하실 수 있습니다.</p>
+                    
+                    <div class="premium-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🤖</span>
+                            <span>AI 자동 리밸런싱</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">📊</span>
+                            <span>고급 포트폴리오 분석</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">📈</span>
+                            <span>실시간 시장 알림</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💰</span>
+                            <span>세금 최적화 도구</span>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-pricing">
+                        <div class="price-tag">
+                            <span class="price-original">월 29,000원</span>
+                            <span class="price-discount">월 19,900원</span>
+                        </div>
+                        <div class="price-save">첫 달 30% 할인!</div>
+                    </div>
+                    
+                    <button class="btn-upgrade-premium">프리미엄 시작하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard-script.js"></script>
+    <script>
+        // 페이지 로드 시 포트폴리오 관리 기능 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePortfolioManagement();
+        });
+    </script>
+</body>
+</html>

@@ -19,15 +19,15 @@
             
             <!-- 네비게이션 메뉴 -->
             <nav class="header-nav">
-                <a href="#dashboard" class="nav-item active">
+                <a href="dashboard.html" class="nav-item active">
                     <span>🏠</span>
                     <span>대시보드</span>
                 </a>
-                <a href="#detailed-finance" class="nav-item">
+                <a href="detailed-finance.html" class="nav-item">
                     <span>📊</span>
                     <span>상세 금융 관리</span>
                 </a>
-                <a href="#community" class="nav-item">
+                <a href="community.html" class="nav-item">
                     <span>👥</span>
                     <span>커뮤니티</span>
                 </a>
@@ -255,249 +255,6 @@
                 </div>
             </section>
 
-            <!-- 여성 성장 콘텐츠 (아코디언 형식) -->
-            <section class="women-growth-accordion" data-widget="women-growth">
-                <div class="widget-handle">⋮</div>
-                <div class="women-accordion-header" onclick="toggleWomenAccordion()">
-                    <div class="women-info">
-                        <h3 class="women-accordion-title">🌸 여성 성장 콘텐츠</h3>
-                        <div class="women-summary">
-                            <span class="content-count">새로운 콘텐츠 8개</span>
-                            <span class="popular-tag">🔥 인기 상승</span>
-                        </div>
-                    </div>
-                    <button class="btn-accordion-toggle">
-                        <span class="accordion-icon">+</span>
-                    </button>
-                </div>
-                
-                <!-- 간단 미리보기 (축소 상태) -->
-                <div class="women-compact-preview">
-                    <div class="preview-item">
-                        <span class="preview-icon">💼</span>
-                        <span class="preview-text">여성 리더십 아카데미</span>
-                        <span class="preview-badge new">NEW</span>
-                    </div>
-                    <div class="preview-item">
-                        <span class="preview-icon">💰</span>
-                        <span class="preview-text">경력단절예방 지원금</span>
-                        <span class="preview-badge urgent">마감임박</span>
-                    </div>
-                    <div class="preview-item">
-                        <span class="preview-icon">🎤</span>
-                        <span class="preview-text">Women in Tech 2025</span>
-                        <span class="preview-badge hot">HOT</span>
-                    </div>
-                </div>
-                
-                <!-- 확장된 콘텐츠 컨테이너 (숨김) -->
-                <div class="women-expanded-container" id="expandedWomenContainer">
-                    <div class="section-controls">
-                        <button class="btn-view-all" onclick="showAllWomenContent()">전체보기</button>
-                    </div>
-                    
-                    <!-- 카테고리 탭 -->
-                    <div class="category-tabs">
-                        <button class="cat-tab active" onclick="filterWomenContent('all')">전체</button>
-                        <button class="cat-tab" onclick="filterWomenContent('policy')">정책</button>
-                        <button class="cat-tab" onclick="filterWomenContent('lecture')">강연</button>
-                        <button class="cat-tab" onclick="filterWomenContent('video')">영상</button>
-                        <button class="cat-tab" onclick="filterWomenContent('mentoring')">멘토링</button>
-                        <button class="cat-tab" onclick="filterWomenContent('event')">이벤트</button>
-                    </div>
-                
-                <!-- 콘텐츠 그리드 (확대된 버전) -->
-                <div class="content-grid" id="women-content-grid">
-                    <div class="grid-container">
-                        <div class="expanded-card" data-category="policy" onclick="showContentDetails('leadership-academy')">
-                            <div class="card-header">
-                                <span class="card-icon">💼</span>
-                                <span class="card-badge new">NEW</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>여성 리더십 아카데미</h4>
-                                <p class="card-desc">무료 MBA 과정으로 커리어를 한 단계 업그레이드하세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 2025.1.15 ~ 6.15</span>
-                                    <span class="meta-item">💰 무료 (4천만원 상당)</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.8</span>
-                                        <span class="review-count">(234 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('leadership-academy')">신청하기</button>
-                        </div>
-                        
-                        <div class="expanded-card" data-category="policy" onclick="showContentDetails('career-support')">
-                            <div class="card-header">
-                                <span class="card-icon">💰</span>
-                                <span class="card-badge urgent">마감임박</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>경력단절예방 지원금</h4>
-                                <p class="card-desc">육아·결혼으로 인한 경력단절을 예방하세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 상시 접수</span>
-                                    <span class="meta-item">💰 월 30만원 × 12개월</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.6</span>
-                                        <span class="review-count">(89 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('career-support')">신청하기</button>
-                        </div>
-                        
-                        <div class="expanded-card" data-category="policy" onclick="showContentDetails('housing-support')">
-                            <div class="card-header">
-                                <span class="card-icon">🏠</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>신혼부부 특별공급</h4>
-                                <p class="card-desc">85㎡ 이하 주택을 우선 공급받으세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 분양 시기별</span>
-                                    <span class="meta-item">💰 시세 대비 -20%</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.2</span>
-                                        <span class="review-count">(156 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('housing-support')">신청하기</button>
-                        </div>
-                        
-                        <div class="expanded-card" data-category="policy" onclick="showContentDetails('startup-fund')">
-                            <div class="card-header">
-                                <span class="card-icon">🚀</span>
-                                <span class="card-badge hot">HOT</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>여성 창업 지원금</h4>
-                                <p class="card-desc">여성 전용 창업 자금을 지원받으세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 2025.1.1 ~ 12.31</span>
-                                    <span class="meta-item">💰 최대 1억원 융자</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.7</span>
-                                        <span class="review-count">(67 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('startup-fund')">신청하기</button>
-                        </div>
-                    </div>
-                    
-                        <!-- 강연 카테고리 콘텐츠 -->
-                        <div class="expanded-card" data-category="lecture" onclick="showContentDetails('women-tech-2025')">
-                            <div class="card-header">
-                                <span class="card-icon">🎤</span>
-                                <span class="card-badge new">NEW</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>Women in Tech 2025</h4>
-                                <p class="card-desc">글로벌 여성 기술 리더들의 특별 강연</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 2025.2.20</span>
-                                    <span class="meta-item">💰 무료</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.9</span>
-                                        <span class="review-count">(312 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('women-tech-2025')">등록하기</button>
-                        </div>
-                        
-                        <div class="expanded-card" data-category="lecture" onclick="showContentDetails('finance-summit')">
-                            <div class="card-header">
-                                <span class="card-icon">📊</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>여성 금융 서밋 2025</h4>
-                                <p class="card-desc">투자 전문가들의 실전 노하우를 배우세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 2025.3.15</span>
-                                    <span class="meta-item">💰 5만원</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.8</span>
-                                        <span class="review-count">(198 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('finance-summit')">등록하기</button>
-                        </div>
-                    </div>
-                    
-                        <!-- 비디오 카테고리 콘텐츠 -->
-                        <div class="expanded-card" data-category="video" onclick="showContentDetails('salary-to-wealth')">
-                            <div class="card-header">
-                                <span class="card-icon">🎥</span>
-                                <span class="card-badge hot">인기</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>월급 200만원으로 억대 자산 만들기</h4>
-                                <p class="card-desc">당근마켓 출신 언니의 실전 투자 비법</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">🕐 45분</span>
-                                    <span class="meta-item">💰 무료</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.9</span>
-                                        <span class="review-count">(1,234 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); watchVideo('salary-to-wealth')">시청하기</button>
-                        </div>
-                        
-                        <!-- 멘토링 카테고리 콘텐츠 -->
-                        <div class="expanded-card" data-category="mentoring" onclick="showContentDetails('ceo-mentoring')">
-                            <div class="card-header">
-                                <span class="card-icon">👩‍💼</span>
-                                <span class="card-badge hot">HOT</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>여성 CEO 1:1 멘토링</h4>
-                                <p class="card-desc">성공한 여성 기업가와의 개인 멘토링</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">⏱️ 3개월</span>
-                                    <span class="meta-item">💰 월 50만원</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.9</span>
-                                        <span class="review-count">(45 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('ceo-mentoring')">신청하기</button>
-                        </div>
-                        
-                        <!-- 이벤트 카테고리 콘텐츠 -->
-                        <div class="expanded-card" data-category="event" onclick="showContentDetails('networking-party')">
-                            <div class="card-header">
-                                <span class="card-icon">🎉</span>
-                                <span class="card-badge new">NEW</span>
-                            </div>
-                            <div class="card-content">
-                                <h4>여성 네트워킹 파티</h4>
-                                <p class="card-desc">다양한 분야의 여성들과 네트워크를 넓혀보세요</p>
-                                <div class="card-meta">
-                                    <span class="meta-item">📅 2025.2.14</span>
-                                    <span class="meta-item">💰 5만원</span>
-                                    <div class="rating">
-                                        <span>⭐ 4.7</span>
-                                        <span class="review-count">(123 리뷰)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('networking-party')">참가 신청</button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-
            <!-- 자산 성장 추이 및 월별 저축 그래프 -->
             <section class="financial-charts-section" data-widget="charts">
                 <div class="widget-handle">⋮</div>
@@ -595,7 +352,7 @@
                             <span>📊</span>
                             포트폴리오 요약
                         </h2>
-                        <button class="btn-detail" onclick="openPortfolioDetail()">상세보기 →</button>
+                        <button class="btn-detail" onclick="location.href='detailed-finance.html'">상세보기 →</button>
                     </div>
                     <div class="portfolio-summary">
                         <div class="summary-stats">
@@ -761,6 +518,260 @@
             </div>
         </div>
 
+        <!-- 여성 성장 콘텐츠 -->
+        <section class="women-growth-section" data-widget="women-growth">
+            <div class="widget-handle">⋮</div>
+            <div class="women-section-header">
+                <h3 class="women-section-title">🌸 여성 성장 콘텐츠</h3>
+                <div class="women-summary">
+                    <span class="content-count">새로운 콘텐츠 8개</span>
+                    <span class="popular-tag">🔥 인기 상승</span>
+                </div>
+            </div>
+            
+            <div class="women-content-wrapper">
+                <!-- 왼쪽: NEW/HOT/마감임박 콘텐츠 -->
+                <div class="women-highlights">
+                    <h4 class="highlights-title">🎆 주목할 콘텐츠</h4>
+                    <div class="highlight-cards">
+                        <div class="highlight-card new">
+                            <span class="highlight-badge">NEW</span>
+                            <div class="highlight-content">
+                                <span class="highlight-icon">💼</span>
+                                <h5>여성 리더십 아카데미</h5>
+                                <p>무료 MBA 과정</p>
+                                <button class="highlight-btn" onclick="applyProgram('leadership-academy')">신청하기</button>
+                            </div>
+                        </div>
+                        <div class="highlight-card hot">
+                            <span class="highlight-badge">HOT</span>
+                            <div class="highlight-content">
+                                <span class="highlight-icon">🎤</span>
+                                <h5>Women in Tech 2025</h5>
+                                <p>글로벌 여성 기술 리더 강연</p>
+                                <button class="highlight-btn" onclick="applyProgram('women-tech-2025')">등록하기</button>
+                            </div>
+                        </div>
+                        <div class="highlight-card urgent">
+                            <span class="highlight-badge">마감임박</span>
+                            <div class="highlight-content">
+                                <span class="highlight-icon">💰</span>
+                                <h5>경력단절예방 지원금</h5>
+                                <p>월 30만원 × 12개월</p>
+                                <button class="highlight-btn" onclick="applyProgram('career-support')">신청하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 오른쪽: 전체 콘텐츠 -->
+                <div class="women-all-content">
+                     
+            <!-- 콘텐츠 그리드 (확대된 버전) -->
+            <div class="content-grid" id="women-content-grid">
+                <div class="section-controls">
+                    <button class="btn-view-all" onclick="showAllWomenContent()">전체보기</button>
+                </div>
+                
+                <!-- 카테고리 탭 -->
+                <div class="category-tabs">
+                    <button class="cat-tab active" onclick="filterWomenContent('all')">전체</button>
+                    <button class="cat-tab" onclick="filterWomenContent('policy')">정책</button>
+                    <button class="cat-tab" onclick="filterWomenContent('lecture')">강연</button>
+                    <button class="cat-tab" onclick="filterWomenContent('video')">영상</button>
+                    <button class="cat-tab" onclick="filterWomenContent('mentoring')">멘토링</button>
+                    <button class="cat-tab" onclick="filterWomenContent('event')">이벤트</button>
+                </div>
+            
+            <!-- 콘텐츠 그리드 (확대된 버전) -->
+            <div class="content-grid" id="women-content-grid">
+                <div class="grid-container">
+                    <div class="expanded-card" data-category="policy" onclick="showContentDetails('leadership-academy')">
+                        <div class="card-header">
+                            <span class="card-icon">💼</span>
+                            <span class="card-badge new">NEW</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>여성 리더십 아카데미</h4>
+                            <p class="card-desc">무료 MBA 과정으로 커리어를 한 단계 업그레이드하세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 2025.1.15 ~ 6.15</span>
+                                <span class="meta-item">💰 무료 (4천만원 상당)</span>
+                                <div class="rating">
+                                    <span>⭐ 4.8</span>
+                                    <span class="review-count">(234 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('leadership-academy')">신청하기</button>
+                    </div>
+                    
+                    <div class="expanded-card" data-category="policy" onclick="showContentDetails('career-support')">
+                        <div class="card-header">
+                            <span class="card-icon">💰</span>
+                            <span class="card-badge urgent">마감임박</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>경력단절예방 지원금</h4>
+                            <p class="card-desc">육아·결혼으로 인한 경력단절을 예방하세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 상시 접수</span>
+                                <span class="meta-item">💰 월 30만원 × 12개월</span>
+                                <div class="rating">
+                                    <span>⭐ 4.6</span>
+                                    <span class="review-count">(89 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('career-support')">신청하기</button>
+                    </div>
+                    
+                    <div class="expanded-card" data-category="policy" onclick="showContentDetails('housing-support')">
+                        <div class="card-header">
+                            <span class="card-icon">🏠</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>신혼부부 특별공급</h4>
+                            <p class="card-desc">85㎡ 이하 주택을 우선 공급받으세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 분양 시기별</span>
+                                <span class="meta-item">💰 시세 대비 -20%</span>
+                                <div class="rating">
+                                    <span>⭐ 4.2</span>
+                                    <span class="review-count">(156 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('housing-support')">신청하기</button>
+                    </div>
+                    
+                    <div class="expanded-card" data-category="policy" onclick="showContentDetails('startup-fund')">
+                        <div class="card-header">
+                            <span class="card-icon">🚀</span>
+                            <span class="card-badge hot">HOT</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>여성 창업 지원금</h4>
+                            <p class="card-desc">여성 전용 창업 자금을 지원받으세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 2025.1.1 ~ 12.31</span>
+                                <span class="meta-item">💰 최대 1억원 융자</span>
+                                <div class="rating">
+                                    <span>⭐ 4.7</span>
+                                    <span class="review-count">(67 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('startup-fund')">신청하기</button>
+                    </div>
+                
+                    <!-- 강연 카테고리 콘텐츠 -->
+                    <div class="expanded-card" data-category="lecture" onclick="showContentDetails('women-tech-2025')">
+                        <div class="card-header">
+                            <span class="card-icon">🎤</span>
+                            <span class="card-badge new">NEW</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>Women in Tech 2025</h4>
+                            <p class="card-desc">글로벌 여성 기술 리더들의 특별 강연</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 2025.2.20</span>
+                                <span class="meta-item">💰 무료</span>
+                                <div class="rating">
+                                    <span>⭐ 4.9</span>
+                                    <span class="review-count">(312 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('women-tech-2025')">등록하기</button>
+                    </div>
+                    
+                    <div class="expanded-card" data-category="lecture" onclick="showContentDetails('finance-summit')">
+                        <div class="card-header">
+                            <span class="card-icon">📊</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>여성 금융 서밋 2025</h4>
+                            <p class="card-desc">투자 전문가들의 실전 노하우를 배우세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 2025.3.15</span>
+                                <span class="meta-item">💰 5만원</span>
+                                <div class="rating">
+                                    <span>⭐ 4.8</span>
+                                    <span class="review-count">(198 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('finance-summit')">등록하기</button>
+                    </div>
+                
+                    <!-- 비디오 카테고리 콘텐츠 -->
+                    <div class="expanded-card" data-category="video" onclick="showContentDetails('salary-to-wealth')">
+                        <div class="card-header">
+                            <span class="card-icon">🎥</span>
+                            <span class="card-badge hot">인기</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>월급 200만원으로 억대 자산 만들기</h4>
+                            <p class="card-desc">당근마켓 출신 언니의 실전 투자 비법</p>
+                            <div class="card-meta">
+                                <span class="meta-item">🕐 45분</span>
+                                <span class="meta-item">💰 무료</span>
+                                <div class="rating">
+                                    <span>⭐ 4.9</span>
+                                    <span class="review-count">(1,234 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); watchVideo('salary-to-wealth')">시청하기</button>
+                    </div>
+                    
+                    <!-- 멘토링 카테고리 콘텐츠 -->
+                    <div class="expanded-card" data-category="mentoring" onclick="showContentDetails('ceo-mentoring')">
+                        <div class="card-header">
+                            <span class="card-icon">👩‍💼</span>
+                            <span class="card-badge hot">HOT</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>여성 CEO 1:1 멘토링</h4>
+                            <p class="card-desc">성공한 여성 기업가와의 개인 멘토링</p>
+                            <div class="card-meta">
+                                <span class="meta-item">⏱️ 3개월</span>
+                                <span class="meta-item">💰 월 50만원</span>
+                                <div class="rating">
+                                    <span>⭐ 4.9</span>
+                                    <span class="review-count">(45 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('ceo-mentoring')">신청하기</button>
+                    </div>
+                    
+                    <!-- 이벤트 카테고리 콘텐츠 -->
+                    <div class="expanded-card" data-category="event" onclick="showContentDetails('networking-party')">
+                        <div class="card-header">
+                            <span class="card-icon">🎉</span>
+                            <span class="card-badge new">NEW</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>여성 네트워킹 파티</h4>
+                            <p class="card-desc">다양한 분야의 여성들과 네트워크를 넓혀보세요</p>
+                            <div class="card-meta">
+                                <span class="meta-item">📅 2025.2.14</span>
+                                <span class="meta-item">💰 5만원</span>
+                                <div class="rating">
+                                    <span>⭐ 4.7</span>
+                                    <span class="review-count">(123 리뷰)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('networking-party')">참가 신청</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
         <!-- 프리미엄 구독 유도 배너 -->
         <div class="card widget-card premium-section" data-widget="premium" draggable="false">
             <div class="widget-handle">⋮</div>
@@ -772,7 +783,7 @@
                         <p>더 많은 기능과 전문가 서비스를 경험해보세요</p>
                         <ul class="premium-features">
                             <li>✅ 실시간 주식 시세 알림</li>
-                            <li>✅ 개인 맞춤 포트폴리오 설계</li>
+                            <li>✅ 개인 맬춤 포트폴리오 설계</li>
                             <li>✅ 세금 최적화 컨설팅</li>
                             <li>✅ VIP 전용 커뮤니티</li>
                         </ul>
@@ -1004,146 +1015,6 @@
         </div>
     </div>
 
-    <!-- 포트폴리오 상세 페이지 모달 -->
-    <div class="modal-overlay" id="portfolioDetailModal" style="display: none;">
-        <div class="modal-content modal-large">
-            <div class="modal-header">
-                <h2>📊 포트폴리오 상세 관리</h2>
-                <button class="modal-close" onclick="closePortfolioDetail()">×</button>
-            </div>
-            <div class="modal-body">
-                <!-- 포트폴리오 요약 정보 -->
-                <div class="portfolio-detail-summary">
-                    <div class="detail-stat-grid">
-                        <div class="detail-stat">
-                            <label>총 투자금액</label>
-                            <value>2,500만원</value>
-                        </div>
-                        <div class="detail-stat">
-                            <label>현재 평가금액</label>
-                            <value>3,250만원</value>
-                        </div>
-                        <div class="detail-stat">
-                            <label>총 수익률</label>
-                            <value class="positive">+30%</value>
-                        </div>
-                        <div class="detail-stat">
-                            <label>연평균 수익률</label>
-                            <value class="positive">+12.3%</value>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 상세 포트폴리오 리스트 -->
-                <div class="portfolio-detail-list">
-                    <h3>💼 자산별 상세 현황</h3>
-                    <table class="portfolio-table">
-                        <thead>
-                            <tr>
-                                <th>자산명</th>
-                                <th>투자금액</th>
-                                <th>현재가치</th>
-                                <th>수익률</th>
-                                <th>비중</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>💵 우량주 적립식</td>
-                                <td>800만원</td>
-                                <td>975만원</td>
-                                <td class="positive">+21.9%</td>
-                                <td>30%</td>
-                                <td>
-                                    <button class="btn-small">리밸런싱</button>
-                                    <button class="btn-small">매도</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>🏦 ISA 계좌</td>
-                                <td>700만원</td>
-                                <td>813만원</td>
-                                <td class="positive">+16.1%</td>
-                                <td>25%</td>
-                                <td>
-                                    <button class="btn-small">추가투자</button>
-                                    <button class="btn-small">세부내역</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>🌍 글로벌 ETF</td>
-                                <td>600만원</td>
-                                <td>650만원</td>
-                                <td class="positive">+8.3%</td>
-                                <td>20%</td>
-                                <td>
-                                    <button class="btn-small">교체</button>
-                                    <button class="btn-small">분석</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>🎓 여성리더십 교육</td>
-                                <td>300만원</td>
-                                <td>488만원</td>
-                                <td class="positive">+62.7%</td>
-                                <td>15%</td>
-                                <td>
-                                    <button class="btn-small">유지</button>
-                                    <button class="btn-small">상세</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>🤖 로보어드바이저</td>
-                                <td>200만원</td>
-                                <td>325만원</td>
-                                <td class="positive">+62.5%</td>
-                                <td>10%</td>
-                                <td>
-                                    <button class="btn-small">설정변경</button>
-                                    <button class="btn-small">성과보기</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- 포트폴리오 분석 -->
-                <div class="portfolio-analysis">
-                    <h3>📊 포트폴리오 분석</h3>
-                    <div class="analysis-grid">
-                        <div class="analysis-card">
-                            <h4>위험도 분석</h4>
-                            <div class="risk-meter">
-                                <div class="risk-level" style="left: 60%;"></div>
-                            </div>
-                            <p>중간 위험 (60/100)</p>
-                        </div>
-                        <div class="analysis-card">
-                            <h4>분산도</h4>
-                            <div class="diversification-score">B+</div>
-                            <p>양호한 분산 투자</p>
-                        </div>
-                        <div class="analysis-card">
-                            <h4>AI 추천</h4>
-                            <p>"글로벌 ETF 비중을 5% 늘리고 국내 주식을 5% 줄이시면 안정성이 개선됩니다."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 액션 버튼 -->
-                <div class="portfolio-actions">
-                    <button class="btn-action btn-primary" onclick="rebalanceAll()">전체 리밸런싱</button>
-                    <button class="btn-action btn-secondary" onclick="exportReport()">보고서 내보내기</button>
-                    <button class="btn-action btn-premium">
-                        <span class="lock-icon">🔒</span>
-                        AI 자동 최적화
-                        <span class="premium-badge">Premium</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- 여성 성장 콘텐츠 전체보기 팝업 -->
     <div class="popup-overlay" id="allWomenContentPopup">
@@ -1437,6 +1308,7 @@
         </div>
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="dashboard-script.js"></script>
     <script>
@@ -1624,8 +1496,15 @@
         
         // 페이지 로드 시 차트 초기화
         document.addEventListener('DOMContentLoaded', function() {
-            updateAssetGrowthChart('1year');
-            updateSavingsChart('1year');
+            // 차트 요소가 존재할 때만 초기화
+            setTimeout(function() {
+                if (document.getElementById('assetGrowthChart')) {
+                    updateAssetGrowthChart('1year');
+                }
+                if (document.getElementById('monthlySavingsChart')) {
+                    updateSavingsChart('1year');
+                }
+            }, 100);
         });
     </script>
 </body>

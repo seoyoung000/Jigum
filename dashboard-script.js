@@ -1,6 +1,15 @@
 // 포트폴리오 차트 생성
 function createPortfolioChart() {
-    const ctx = document.getElementById('portfolioChart').getContext('2d');
+    const canvas = document.getElementById('portfolioChart');
+    if (!canvas) return;
+    
+    // 기존 차트가 있다면 제거
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
     
     new Chart(ctx, {
         type: 'doughnut',
@@ -41,7 +50,16 @@ function createPortfolioChart() {
 
 // 성장 차트 생성
 function createGrowthChart() {
-    const ctx = document.getElementById('growthChart').getContext('2d');
+    const canvas = document.getElementById('growthChart');
+    if (!canvas) return;
+    
+    // 기존 차트가 있다면 제거
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
     
     const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
     const data = [2800, 2950, 2850, 3100, 3250, 3180, 3300, 3150, 3400, 3250, 3200, 3250];
@@ -194,13 +212,21 @@ document.addEventListener('click', function(event) {
 
 // 새로운 차트 생성 함수들 추가
 function createAssetGrowthChart() {
-    const ctx = document.getElementById('assetGrowthChart');
-    if (!ctx) return;
+    const canvas = document.getElementById('assetGrowthChart');
+    if (!canvas) return;
+    
+    // 기존 차트가 있다면 제거
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
     
     const data = [2400, 2500, 2650, 2800, 2950, 2850, 3100, 3250, 3180, 3300, 3150, 3250];
     const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
     
-    new Chart(ctx.getContext('2d'), {
+    new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
@@ -264,14 +290,22 @@ function createAssetGrowthChart() {
 }
 
 function createMonthlySavingsChart() {
-    const ctx = document.getElementById('monthlySavingsChart');
-    if (!ctx) return;
+    const canvas = document.getElementById('monthlySavingsChart');
+    if (!canvas) return;
+    
+    // 기존 차트가 있다면 제거
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
     
     const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
     const savings = [50, 45, 60, 55, 50, 40, 45, 50, 40, 55, 60, 45];
     const investment = [30, 35, 40, 45, 40, 35, 35, 40, 45, 35, 25, 40];
     
-    new Chart(ctx.getContext('2d'), {
+    new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -364,7 +398,7 @@ function updateAssetGrowthChart(period) {
             break;
     }
     
-    new Chart(ctx.getContext('2d'), {
+    new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
@@ -424,7 +458,7 @@ function updateSavingsChart(period) {
         investment = [30, 35, 40, 45, 40, 35, 35, 40, 45, 35, 25, 40];
     }
     
-    new Chart(ctx.getContext('2d'), {
+    new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -482,22 +516,97 @@ function completeMission(button) {
     progressText.textContent = `경험치 ${currentExp}/1000`;
 }
 
-// 포트폴리오 상세 페이지 열기
-function openPortfolioDetail() {
-    document.getElementById('portfolioDetailModal').style.display = 'flex';
+// 상세 금융 관리 페이지 열기
+function openDetailedFinance() {
+    console.log('상세 금융 관리 페이지 열기 시도');
+    
+    // 메인 컨테이너 숨기기
+    const mainContainer = document.querySelector('.main-container');
+    if (mainContainer) {
+        mainContainer.style.display = 'none';
+        console.log('메인 컨테이너 숨김');
+    }
+    
+    // 사이드바 숨기기
+    const sidebar = document.getElementById('floatingSidebar');
+    if (sidebar) {
+        sidebar.style.display = 'none';
+        console.log('사이드바 숨김');
+    }
+    
+    // 상세 금융 관리 페이지 표시
+    const detailedPage = document.getElementById('detailedFinancePage');
+    if (detailedPage) {
+        detailedPage.style.display = 'block';
+        detailedPage.style.visibility = 'visible';
+        detailedPage.style.opacity = '1';
+        console.log('상세 금융 관리 페이지 표시');
+        console.log('페이지 스타일:', detailedPage.style.cssText);
+        
+        // 포트폴리오 관리 기능 초기화
+        setTimeout(() => {
+            initializePortfolioManagement();
+        }, 100);
+    } else {
+        console.error('detailedFinancePage 요소를 찾을 수 없습니다');
+    }
+    
+    // 네비게이션 탭 활성화 변경
+    updateNavigation('detailed-finance');
 }
 
-// 포트폴리오 상세 페이지 닫기
-function closePortfolioDetail() {
-    document.getElementById('portfolioDetailModal').style.display = 'none';
+// 대시보드로 돌아가기
+function goBackToDashboard() {
+    console.log('대시보드로 돌아가기 시도');
+    
+    // 상세 금융 관리 페이지 숨기기
+    const detailedPage = document.getElementById('detailedFinancePage');
+    if (detailedPage) {
+        detailedPage.style.display = 'none';
+        console.log('상세 금융 관리 페이지 숨김');
+    }
+    
+    // 메인 컨테이너 표시
+    const mainContainer = document.querySelector('.main-container');
+    if (mainContainer) {
+        mainContainer.style.display = 'block';
+        console.log('메인 컨테이너 표시');
+    }
+    
+    // 사이드바 다시 표시
+    const sidebar = document.getElementById('floatingSidebar');
+    if (sidebar) {
+        sidebar.style.display = 'block';
+        console.log('사이드바 다시 표시');
+    }
+    
+    // 네비게이션 탭 활성화 변경
+    updateNavigation('dashboard');
+}
+
+// 네비게이션 업데이트 함수
+function updateNavigation(activeTab) {
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    const activeNav = document.querySelector(`[href="#${activeTab}"]`);
+    if (activeNav) {
+        activeNav.classList.add('active');
+    }
 }
 
 // 포트폴리오 미니 차트 생성
 function createPortfolioMiniChart() {
-    const ctx = document.getElementById('portfolioMiniChart');
-    if (!ctx) return;
+    const canvas = document.getElementById('portfolioMiniChart');
+    if (!canvas) return;
     
-    new Chart(ctx.getContext('2d'), {
+    // 기존 차트가 있다면 제거
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    
+    new Chart(ctx, {
         type: 'pie',
         data: {
             labels: ['주식', 'ETF', '채권', '기타'],
@@ -884,11 +993,308 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// 헤더 네비게이션 이벤트 처리
+function initializeNavigation() {
+    // 대시보드 네비게이션
+    const dashboardNav = document.querySelector('[href="#dashboard"]');
+    if (dashboardNav) {
+        dashboardNav.addEventListener('click', function(e) {
+            e.preventDefault();
+            goBackToDashboard();
+        });
+    }
+    
+    // 상세 금융 관리 네비게이션
+    const detailedFinanceNav = document.querySelector('[href="#detailed-finance"]');
+    if (detailedFinanceNav) {
+        detailedFinanceNav.addEventListener('click', function(e) {
+            e.preventDefault();
+            openDetailedFinance();
+        });
+    }
+    
+    // 커뮤니티 네비게이션 (향후 확장용)
+    const communityNav = document.querySelector('[href="#community"]');
+    if (communityNav) {
+        communityNav.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('커뮤니티 페이지는 준비 중입니다.');
+        });
+    }
+}
+
+// 포트폴리오 관리 기능들
+const portfolioData = {
+    stock: { name: '우량주 적립식', percentage: 30, amount: 975 },
+    isa: { name: 'ISA 계좌', percentage: 25, amount: 813 },
+    etf: { name: '글로벌 ETF', percentage: 20, amount: 650 },
+    leadership: { name: '여성리더십 교육', percentage: 15, amount: 488 },
+    robo: { name: '로보어드바이저', percentage: 10, amount: 325 }
+};
+
+const originalPortfolio = { 
+    stock: { name: '우량주 적립식', percentage: 30, amount: 975 },
+    isa: { name: 'ISA 계좌', percentage: 25, amount: 813 },
+    etf: { name: '글로벌 ETF', percentage: 20, amount: 650 },
+    leadership: { name: '여성리더십 교육', percentage: 15, amount: 488 },
+    robo: { name: '로보어드바이저', percentage: 10, amount: 325 }
+};
+
+// 포트폴리오 관리 초기화
+function initializePortfolioManagement() {
+    console.log('포트폴리오 관리 초기화 시작');
+    
+    // 슬라이더 값 설정
+    for (const [key, data] of Object.entries(portfolioData)) {
+        const slider = document.getElementById(`${key}-slider`);
+        if (slider) {
+            slider.value = data.percentage;
+            console.log(`${key} 슬라이더 설정: ${data.percentage}%`);
+        }
+    }
+    
+    // 표시 업데이트
+    updatePortfolioDisplay();
+    updateSummaryInfo();
+    
+    console.log('포트폴리오 관리 초기화 완료');
+}
+
+// 포트폴리오 비율 업데이트
+function updatePortfolioAllocation(assetType, newPercentage) {
+    portfolioData[assetType].percentage = parseInt(newPercentage);
+    
+    // 총 자산 3250만원 기준으로 금액 계산
+    portfolioData[assetType].amount = Math.round((newPercentage / 100) * 3250);
+    
+    // UI 업데이트
+    updatePortfolioDisplay();
+    updateSummaryInfo();
+}
+
+// 포트폴리오 표시 업데이트
+function updatePortfolioDisplay() {
+    for (const [key, data] of Object.entries(portfolioData)) {
+        const valueElement = document.getElementById(`${key}-value`);
+        if (valueElement) {
+            valueElement.textContent = `${data.percentage}% (${data.amount}만원)`;
+            console.log(`${key} 값 업데이트: ${data.percentage}% (${data.amount}만원)`);
+        } else {
+            console.log(`${key}-value 요소를 찾을 수 없음`);
+        }
+    }
+}
+
+// 요약 정보 업데이트
+function updateSummaryInfo() {
+    const totalPercentage = Object.values(portfolioData).reduce((sum, data) => sum + data.percentage, 0);
+    const expectedReturn = calculateExpectedReturn();
+    const riskLevel = calculateRiskLevel();
+    
+    const totalElement = document.getElementById('total-percentage');
+    const returnElement = document.getElementById('expected-return');
+    const riskElement = document.getElementById('risk-level');
+    
+    if (totalElement) {
+        totalElement.textContent = `${totalPercentage}%`;
+        
+        // 총 비율이 100%가 아니면 경고 표시
+        if (totalPercentage !== 100) {
+            totalElement.style.color = '#dc2626';
+            totalElement.parentElement.style.fontWeight = 'bold';
+        } else {
+            totalElement.style.color = '#16a34a';
+            totalElement.parentElement.style.fontWeight = 'normal';
+        }
+    }
+    
+    if (returnElement) {
+        returnElement.textContent = `+${expectedReturn}%`;
+    }
+    
+    if (riskElement) {
+        riskElement.textContent = riskLevel;
+    }
+    
+    console.log(`요약 정보 업데이트: ${totalPercentage}%, ${expectedReturn}%, ${riskLevel}`);
+}
+
+// 예상 수익률 계산
+function calculateExpectedReturn() {
+    const returns = {
+        stock: 14.5,
+        isa: 12.8,
+        etf: 11.2,
+        leadership: 18.7,
+        robo: 15.3
+    };
+    
+    let weightedReturn = 0;
+    for (const [key, data] of Object.entries(portfolioData)) {
+        weightedReturn += (data.percentage / 100) * returns[key];
+    }
+    
+    return weightedReturn.toFixed(1);
+}
+
+// 위험도 계산
+function calculateRiskLevel() {
+    const risks = {
+        stock: 3,
+        isa: 2,
+        etf: 2,
+        leadership: 4,
+        robo: 3
+    };
+    
+    let weightedRisk = 0;
+    for (const [key, data] of Object.entries(portfolioData)) {
+        weightedRisk += (data.percentage / 100) * risks[key];
+    }
+    
+    if (weightedRisk < 2.5) return '낮음';
+    if (weightedRisk < 3.5) return '중간';
+    return '높음';
+}
+
+// 포트폴리오 리셋
+function resetPortfolio() {
+    for (const [key, data] of Object.entries(originalPortfolio)) {
+        portfolioData[key] = { ...data };
+        const slider = document.getElementById(`${key}-slider`);
+        if (slider) {
+            slider.value = data.percentage;
+        }
+    }
+    updatePortfolioDisplay();
+    updateSummaryInfo();
+}
+
+// 조정 모드 변경
+function setAdjustmentMode(mode) {
+    document.querySelectorAll('.btn-toggle').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    if (mode === 'amount') {
+        alert('금액 조정 모드는 프리미엄 기능입니다.\n\n비율 조정 모드를 사용해주세요.');
+        document.querySelectorAll('.btn-toggle').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.btn-toggle').classList.add('active');
+    }
+}
+
+// 리밸런싱 미리보기
+function previewRebalancing() {
+    const totalPercentage = Object.values(portfolioData).reduce((sum, data) => sum + data.percentage, 0);
+    
+    if (totalPercentage !== 100) {
+        alert(`포트폴리오 비율이 ${totalPercentage}%입니다.\n100%로 맞춰주세요.`);
+        return;
+    }
+    
+    let message = "📊 리밸런싱 미리보기\n\n";
+    let totalCost = 0;
+    
+    for (const [key, data] of Object.entries(portfolioData)) {
+        const original = originalPortfolio[key];
+        const difference = data.amount - original.amount;
+        
+        if (difference !== 0) {
+            const action = difference > 0 ? '매수' : '매도';
+            const amount = Math.abs(difference);
+            const fee = Math.round(amount * 0.003); // 0.3% 수수료
+            
+            message += `${data.name}: ${action} ${amount}만원 (수수료: ${fee}만원)\n`;
+            totalCost += fee;
+        }
+    }
+    
+    message += `\n총 예상 수수료: ${totalCost}만원`;
+    message += `\n예상 수익률: ${calculateExpectedReturn()}%`;
+    
+    if (confirm(message + "\n\n리밸런싱을 실행하시겠습니까?")) {
+        executeRebalancing();
+    }
+}
+
+// 리밸런싱 실행
+function executeRebalancing() {
+    // 로딩 애니메이션 표시
+    const loadingMsg = "리밸런싱을 실행 중입니다...\n\n";
+    
+    setTimeout(() => {
+        // 원본 데이터 업데이트
+        for (const [key, data] of Object.entries(portfolioData)) {
+            originalPortfolio[key] = { ...data };
+        }
+        
+        alert("✅ 리밸런싱이 완료되었습니다!\n\n새로운 포트폴리오 구성이 적용되었습니다.");
+        refreshAIAnalysis();
+    }, 2000);
+}
+
+// AI 분석 새로고침
+function refreshAIAnalysis() {
+    alert("🤖 AI 분석을 새로고침하고 있습니다...\n\n최신 시장 데이터를 반영하여 분석을 업데이트합니다.");
+    
+    // AI 분석 결과 시뮬레이션
+    setTimeout(() => {
+        const riskLevel = calculateRiskLevel();
+        const expectedReturn = calculateExpectedReturn();
+        
+        let analysisMessage = "🤖 AI 분석 결과\n\n";
+        analysisMessage += `위험도: ${riskLevel}\n`;
+        analysisMessage += `예상 수익률: ${expectedReturn}%\n\n`;
+        
+        if (riskLevel === '낮음') {
+            analysisMessage += "💡 추천: 수익률 향상을 위해 성장주 비중을 늘려보세요.";
+        } else if (riskLevel === '높음') {
+            analysisMessage += "⚠️ 주의: 안정성을 위해 채권이나 안전자산 비중을 늘려보세요.";
+        } else {
+            analysisMessage += "✅ 양호: 현재 포트폴리오 구성이 균형잡혀 있습니다.";
+        }
+        
+        alert(analysisMessage);
+    }, 1500);
+}
+
+// 추가 관리 기능들
+function showPerformanceAnalysis() {
+    alert("📈 성과 분석\n\n올해 수익률: +12.3%\nKOSPI 대비: +4.2%\n샤프 비율: 1.23\n\n상세 분석은 프리미엄에서 확인하세요.");
+}
+
+function showTaxOptimization() {
+    alert("💰 세금 최적화 가이드\n\n• ISA 계좌 한도 활용 (연 2000만원)\n• 연말 손익 통산 고려\n• 배당소득 분산 투자\n\n상세 전략은 전문가 상담을 받아보세요.");
+}
+
+function showRiskManagement() {
+    alert("📊 리스크 체크\n\n현재 위험도: 중간\nVaR (95%): -8.2%\n최대 손실 예상: -15.7%\n\n위험 관리 전략을 세워보세요.");
+}
+
+function showGoalManagement() {
+    alert("🎯 투자 목표 관리\n\n목표: 10년 후 1억원\n현재 진행률: 32.5%\n필요 월 투자액: 65만원\n\n목표 달성 가능성: 높음");
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    createPortfolioChart();
-    createGrowthChart();
-    updateCalendar();
-    createPortfolioMiniChart();
-    createAssetGrowthChart();
-    createMonthlySavingsChart();
+    // 네비게이션 초기화
+    initializeNavigation();
+    
+    // 대시보드 페이지의 차트들만 초기화
+    setTimeout(function() {
+        if (document.getElementById('portfolioChart')) {
+            createPortfolioChart();
+        }
+        if (document.getElementById('growthChart')) {
+            createGrowthChart();
+        }
+        if (document.getElementById('portfolioMiniChart')) {
+            createPortfolioMiniChart();
+        }
+        updateCalendar();
+        
+        // 포트폴리오 관리 페이지가 표시될 때 초기화
+        if (document.getElementById('stock-slider')) {
+            updatePortfolioDisplay();
+            updateSummaryInfo();
+        }
+    }, 50);
 });
