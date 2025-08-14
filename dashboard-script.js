@@ -186,7 +186,10 @@ function nextMonth() {
 
 function updateCalendar() {
     const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-    document.querySelector('.calendar-month').textContent = `${currentDate.getFullYear()}년 ${monthNames[currentDate.getMonth()]}`;
+    const calendarMonth = document.querySelector('.calendar-month');
+    if (calendarMonth) {
+        calendarMonth.textContent = `${currentDate.getFullYear()}년 ${monthNames[currentDate.getMonth()]}`;
+    }
 }
 
 function toggleTodo(checkbox) {
@@ -855,13 +858,507 @@ function toggleSidebar() {
     }
 }
 
-// 프리미엄 모달 기능
+// 프리미엄 모달 기능 - AI 최적화 기능 추가
 function showPremiumModal() {
-    document.getElementById('premiumModal').classList.add('active');
+    // AI 자동 최적화 시작
+    startAIOptimization();
 }
 
 function closePremiumModal() {
     document.getElementById('premiumModal').classList.remove('active');
+}
+
+// AI 자동 최적화 기능
+function startAIOptimization() {
+    // AI 최적화 오버레이 생성
+    const overlay = document.createElement('div');
+    overlay.id = 'ai-optimization-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    const container = document.createElement('div');
+    container.style.cssText = `
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        position: relative;
+    `;
+    
+    // X 닫기 버튼 추가
+    const closeButton = document.createElement('button');
+    closeButton.style.cssText = `
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        background: #f3f4f6;
+        color: #6b7280;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 10001;
+    `;
+    closeButton.innerHTML = '✕';
+    closeButton.onmouseover = () => {
+        closeButton.style.background = '#e5e7eb';
+        closeButton.style.color = '#374151';
+    };
+    closeButton.onmouseout = () => {
+        closeButton.style.background = '#f3f4f6';
+        closeButton.style.color = '#6b7280';
+    };
+    closeButton.onclick = closeOptimizationOverlay;
+    container.appendChild(closeButton);
+    
+    // 상태 메시지 컨테이너
+    const statusContainer = document.createElement('div');
+    statusContainer.innerHTML = `
+        <div style="text-align: center; color: #1e293b;">
+            <h2 style="font-size: 28px; margin-bottom: 30px; color: #1e40af;">🤖 AI 포트폴리오 최적화</h2>
+            <div id="ai-status-message" style="font-size: 18px; margin-bottom: 20px; min-height: 60px; color: #475569;">
+                사용자 정보를 가져오는 중...
+            </div>
+            <div style="position: relative; margin: 30px auto; width: 300px; height: 300px;">
+                <canvas id="ai-optimization-chart" width="300" height="300"></canvas>
+                <div id="optimization-percentage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; font-weight: bold; color: #1e40af;">
+                    0%
+                </div>
+            </div>
+            <div id="optimization-details" style="margin-top: 30px; font-size: 14px; color: #64748b;">
+                
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(statusContainer);
+    overlay.appendChild(container);
+    document.body.appendChild(overlay);
+    
+    // 최적화 프로세스 시작
+    runOptimizationProcess();
+}
+
+// AI 최적화 프로세스
+function runOptimizationProcess() {
+    const messages = [
+        { text: "사용자의 투자 프로필을 분석하는 중...", duration: 2000, progress: 15 },
+        { text: "현재 ETF 보유 현황을 확인했어요...", duration: 2000, progress: 30 },
+        { text: "시장 데이터를 실시간으로 수집하는 중...", duration: 2500, progress: 45 },
+        { text: "AI가 당신의 포트폴리오를 최적화하고 있어요...", duration: 3000, progress: 60 },
+        { text: "리스크 분석 및 수익률 계산 중...", duration: 2000, progress: 75 },
+        { text: "리밸런싱 전략을 수립하는 중...", duration: 2000, progress: 90 },
+        { text: "최적화 완료! 결과를 확인하세요!", duration: 1500, progress: 100 }
+    ];
+    
+    let currentIndex = 0;
+    const statusElement = document.getElementById('ai-status-message');
+    const percentageElement = document.getElementById('optimization-percentage');
+    const detailsElement = document.getElementById('optimization-details');
+    
+    // 차트 초기화
+    const canvas = document.getElementById('ai-optimization-chart');
+    const ctx = canvas.getContext('2d');
+    
+    function drawProgressChart(progress) {
+        ctx.clearRect(0, 0, 300, 300);
+        
+        // 배경 원
+        ctx.beginPath();
+        ctx.arc(150, 150, 120, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'rgba(30, 64, 175, 0.1)';
+        ctx.lineWidth = 20;
+        ctx.stroke();
+        
+        // 진행 원
+        ctx.beginPath();
+        const endAngle = (progress / 100) * 2 * Math.PI - Math.PI / 2;
+        ctx.arc(150, 150, 120, -Math.PI / 2, endAngle);
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        
+        // 파티클 효과
+        if (progress < 100) {
+            for (let i = 0; i < 3; i++) {
+                const angle = endAngle + (Math.random() - 0.5) * 0.2;
+                const x = 150 + Math.cos(angle) * 120;
+                const y = 150 + Math.sin(angle) * 120;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 3 + Math.random() * 3, 0, 2 * Math.PI);
+                ctx.fillStyle = 'rgba(59, 130, 246, ' + Math.random() + ')';
+                ctx.fill();
+            }
+        }
+    }
+    
+    function updateMessage() {
+        if (currentIndex < messages.length) {
+            const message = messages[currentIndex];
+            
+            // 메시지 페이드 인 효과
+            statusElement.style.opacity = '0';
+            setTimeout(() => {
+                statusElement.textContent = message.text;
+                statusElement.style.opacity = '1';
+                statusElement.style.transition = 'opacity 0.5s ease';
+            }, 200);
+            
+            // 프로그레스 업데이트
+            animateProgress(message.progress);
+            
+            // 세부 정보 추가
+            if (currentIndex === 2) {
+                detailsElement.innerHTML = `
+                    <div style="background: rgba(30, 64, 175, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(30, 64, 175, 0.1);">
+                        <div style="color: #1e40af;">KOSPI: 2,451.23 (+1.2%)</div>
+                        <div style="color: #1e40af;">NASDAQ: 15,234.56 (+0.8%)</div>
+                    </div>
+                `;
+            } else if (currentIndex === 4) {
+                detailsElement.innerHTML = `
+                    <div style="background: rgba(30, 64, 175, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(30, 64, 175, 0.1);">
+                        <div style="color: #1e40af;">예상 수익률: +15.7%</div>
+                        <div style="color: #1e40af;">리스크 레벨: 중간</div>
+                    </div>
+                `;
+            }
+            
+            currentIndex++;
+            setTimeout(updateMessage, message.duration);
+        } else {
+            // 최적화 완료 - 결과 표시
+            showOptimizationResults();
+        }
+    }
+    
+    function animateProgress(targetProgress) {
+        const currentProgress = parseInt(percentageElement.textContent);
+        const step = (targetProgress - currentProgress) / 20;
+        let current = currentProgress;
+        
+        const interval = setInterval(() => {
+            current += step;
+            if ((step > 0 && current >= targetProgress) || (step < 0 && current <= targetProgress)) {
+                current = targetProgress;
+                clearInterval(interval);
+            }
+            percentageElement.textContent = Math.round(current) + '%';
+            drawProgressChart(current);
+        }, 50);
+    }
+    
+    // 시작
+    updateMessage();
+}
+
+// 최적화 결과 표시
+function showOptimizationResults() {
+    const overlay = document.getElementById('ai-optimization-overlay');
+    if (!overlay) return;
+    
+    // X 버튼 다시 추가
+    const closeBtn = document.createElement('button');
+    closeBtn.style.cssText = `
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        background: #f3f4f6;
+        color: #6b7280;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 10001;
+    `;
+    closeBtn.innerHTML = '✕';
+    closeBtn.onclick = closeOptimizationOverlay;
+    overlay.appendChild(closeBtn);
+    
+    // 결과 컨테이너 생성
+    const resultsHTML = `
+        <div style="text-align: center; color: #1e293b; animation: fadeIn 0.5s ease; padding-top: 20px;">
+            <h2 style="font-size: 32px; margin-bottom: 30px; color: #1e40af;">✨ 최적화 완료!</h2>
+            
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                <h3 style="font-size: 20px; margin-bottom: 15px; color: #1e40af;">📊 리밸런싱 결과</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <div style="font-size: 14px; color: #64748b;">이전 포트폴리오</div>
+                        <canvas id="before-portfolio" width="150" height="150"></canvas>
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; color: #64748b;">최적화된 포트폴리오</div>
+                        <canvas id="after-portfolio" width="150" height="150"></canvas>
+                    </div>
+                </div>
+                
+                <div id="rebalancing-details" style="text-align: left; font-size: 14px;">
+                    <div style="padding: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px;">
+                        <span style="color: #4ade80;">▲</span> 우량주 ETF: 30% → 35% (+5%)
+                    </div>
+                    <div style="padding: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px;">
+                        <span style="color: #f87171;">▼</span> 신흥국 ETF: 20% → 15% (-5%)
+                    </div>
+                    <div style="padding: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px;">
+                        <span style="color: #4ade80;">▲</span> 기술주 ETF: 15% → 20% (+5%)
+                    </div>
+                    <div style="padding: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <span style="color: #f87171;">▼</span> 채권 ETF: 35% → 30% (-5%)
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">💰 예상 수익률 증가</h3>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 30px;">
+                    <div>
+                        <div style="font-size: 14px; color: #64748b;">기존</div>
+                        <div style="font-size: 36px; font-weight: bold; color: white;">12.3%</div>
+                    </div>
+                    <div style="font-size: 30px; color: white;">→</div>
+                    <div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.9);">최적화 후</div>
+                        <div style="font-size: 36px; font-weight: bold; color: #86efac;">15.7%</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; font-size: 18px;">
+                    <span style="color: #86efac; font-weight: bold;">+3.4%</span> 수익률 개선 예상
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 15px; padding: 20px; margin-bottom: 25px;">
+                <h4 style="font-size: 16px; margin-bottom: 15px; color: #1e40af;">🎯 AI 추천 사항</h4>
+                <div style="text-align: left; font-size: 14px; line-height: 1.8; color: #475569;">
+                    <div>• 시장 변동성 증가에 대비한 안전자산 비중 조정</div>
+                    <div>• 성장 가능성 높은 기술주 ETF 비중 확대</div>
+                    <div>• 분기별 자동 리밸런싱으로 수익률 극대화</div>
+                    <div>• 세금 효율적인 ISA 계좌 활용 권장</div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="applyOptimization()" style="
+                    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                    color: white;
+                    border: none;
+                    padding: 15px 40px;
+                    border-radius: 10px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+                ">
+                    적용하기
+                </button>
+                <button onclick="closeOptimizationOverlay()" style="
+                    background: white;
+                    color: #64748b;
+                    border: 1px solid #e2e8f0;
+                    padding: 15px 40px;
+                    border-radius: 10px;
+                    font-size: 16px;
+                    cursor: pointer;
+                ">
+                    나중에
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // 기존 내용 교체
+    overlay.querySelector('div').innerHTML = resultsHTML;
+    
+    // 포트폴리오 차트 그리기
+    setTimeout(() => {
+        drawPortfolioComparison();
+    }, 100);
+}
+
+// 포트폴리오 비교 차트 그리기
+function drawPortfolioComparison() {
+    // 이전 포트폴리오
+    const beforeCanvas = document.getElementById('before-portfolio');
+    if (beforeCanvas) {
+        const ctx = beforeCanvas.getContext('2d');
+        drawPieChart(ctx, [30, 20, 15, 35], ['#3498db', '#e74c3c', '#f39c12', '#95a5a6'], 75);
+    }
+    
+    // 최적화된 포트폴리오
+    const afterCanvas = document.getElementById('after-portfolio');
+    if (afterCanvas) {
+        const ctx = afterCanvas.getContext('2d');
+        drawPieChart(ctx, [35, 15, 20, 30], ['#3498db', '#e74c3c', '#f39c12', '#95a5a6'], 75);
+    }
+}
+
+// 간단한 파이 차트 그리기 함수
+function drawPieChart(ctx, data, colors, centerX) {
+    const centerY = 75;
+    const radius = 60;
+    let currentAngle = -Math.PI / 2;
+    
+    const total = data.reduce((sum, val) => sum + val, 0);
+    
+    data.forEach((value, index) => {
+        const sliceAngle = (value / total) * 2 * Math.PI;
+        
+        // 파이 조각 그리기
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+        ctx.lineTo(centerX, centerY);
+        ctx.fillStyle = colors[index];
+        ctx.fill();
+        
+        currentAngle += sliceAngle;
+    });
+    
+    // 중앙 원 (도넛 효과)
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.4, 0, 2 * Math.PI);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+}
+
+// 최적화 적용
+function applyOptimization() {
+    const overlay = document.getElementById('ai-optimization-overlay');
+    
+    // 적용 중 메시지 표시
+    overlay.querySelector('div').innerHTML = `
+        <div style="text-align: center; color: white; padding: 40px;">
+            <h2 style="font-size: 28px; margin-bottom: 30px;">⚡ 포트폴리오 업데이트 중...</h2>
+            <div style="font-size: 18px; opacity: 0.9;">잠시만 기다려주세요</div>
+            <div style="margin-top: 30px;">
+                <div style="width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            </div>
+        </div>
+    `;
+    
+    // 스피너 애니메이션 CSS 추가
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    setTimeout(() => {
+        // 성공 메시지
+        overlay.querySelector('div').innerHTML = `
+            <div style="text-align: center; color: white; padding: 40px; animation: fadeIn 0.5s ease;">
+                <div style="font-size: 80px; margin-bottom: 20px;">✅</div>
+                <h2 style="font-size: 28px; margin-bottom: 20px;">최적화 완료!</h2>
+                <div style="font-size: 18px; opacity: 0.9; margin-bottom: 30px;">
+                    포트폴리오가 성공적으로 업데이트되었습니다.
+                </div>
+                <button onclick="closeOptimizationOverlay()" style="
+                    background: white;
+                    color: #667eea;
+                    border: none;
+                    padding: 12px 30px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    cursor: pointer;
+                ">
+                    확인
+                </button>
+            </div>
+        `;
+        
+        // 대시보드 수익률 업데이트
+        updateDashboardReturns();
+        
+        setTimeout(() => {
+            closeOptimizationOverlay();
+        }, 3000);
+    }, 2000);
+}
+
+// 최적화 오버레이 닫기
+function closeOptimizationOverlay() {
+    const overlay = document.getElementById('ai-optimization-overlay');
+    if (overlay) {
+        overlay.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            overlay.remove();
+        }, 300);
+    }
+}
+
+// 대시보드 수익률 업데이트
+function updateDashboardReturns() {
+    // 수익률 텍스트 업데이트
+    const returnElements = document.querySelectorAll('.positive-return');
+    returnElements.forEach(element => {
+        if (element.textContent.includes('12.3%')) {
+            // 애니메이션으로 숫자 변경
+            animateValue(element, 12.3, 15.7, 2000);
+        }
+    });
+    
+    // 목표 달성률 업데이트
+    const subtitleElement = document.querySelector('.welcome-subtitle');
+    if (subtitleElement) {
+        subtitleElement.innerHTML = '목표 수익률: 8% | 현재 달성률: <span style="color: #10b981; font-weight: bold;">15.7%</span>';
+    }
+}
+
+// 숫자 애니메이션 함수
+function animateValue(element, start, end, duration) {
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const currentValue = start + (end - start) * progress;
+        element.textContent = `+${currentValue.toFixed(1)}%`;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.style.color = '#10b981';
+            element.style.fontWeight = 'bold';
+        }
+    }
+    
+    requestAnimationFrame(update);
 }
 
 // 미션 아코디언 토글 기능
@@ -1289,7 +1786,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('portfolioMiniChart')) {
             createPortfolioMiniChart();
         }
-        updateCalendar();
+        // 캘린더가 존재할 때만 업데이트
+        if (document.querySelector('.calendar-month')) {
+            updateCalendar();
+        }
         
         // 포트폴리오 관리 페이지가 표시될 때 초기화
         if (document.getElementById('stock-slider')) {

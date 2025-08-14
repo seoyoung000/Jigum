@@ -36,7 +36,7 @@
             <div class="user-menu">
                 <div class="user-info">
                     <div class="avatar">김</div>
-                    <span>김미래님</span>
+                    <span>강선영님</span>
                 </div>
                 <button class="btn-logout" onclick="logout()">로그아웃</button>
             </div>
@@ -538,22 +538,22 @@
                 <div class="women-highlights">
                     <h4 class="highlights-title">🎆 주목할 콘텐츠</h4>
                     <div class="highlight-cards">
-                        <div class="highlight-card new">
-                            <span class="highlight-badge">NEW</span>
-                            <div class="highlight-content">
-                                <span class="highlight-icon">💼</span>
-                                <h5>여성 리더십 아카데미</h5>
-                                <p>무료 MBA 과정</p>
-                                <button class="highlight-btn" onclick="applyProgram('leadership-academy')">신청하기</button>
-                            </div>
-                        </div>
-                        <div class="highlight-card hot">
+                        <div class="highlight-card hot" onclick="showContentDetails('women-tech-2025')" style="cursor: pointer;">
                             <span class="highlight-badge">HOT</span>
                             <div class="highlight-content">
                                 <span class="highlight-icon">🎤</span>
                                 <h5>Women in Tech 2025</h5>
                                 <p>글로벌 여성 기술 리더 강연</p>
-                                <button class="highlight-btn" onclick="applyProgram('women-tech-2025')">등록하기</button>
+                                <button class="highlight-btn" onclick="event.stopPropagation(); applyProgram('women-tech-2025')">등록하기</button>
+                            </div>
+                        </div>
+                        <div class="highlight-card new" onclick="showContentDetails('leadership-academy')" style="cursor: pointer;">
+                            <span class="highlight-badge">NEW</span>
+                            <div class="highlight-content">
+                                <span class="highlight-icon">💼</span>
+                                <h5>여성 리더십 아카데미</h5>
+                                <p>무료 MBA 과정</p>
+                                <button class="highlight-btn" onclick="event.stopPropagation(); applyProgram('leadership-academy')">신청하기</button>
                             </div>
                         </div>
                         <div class="highlight-card urgent">
@@ -1443,6 +1443,15 @@
         
         // 콘텐츠 상세보기
         const contentDetailsData = {
+            'women-tech-2025': {
+                title: '2025 서울 우먼테크 해커톤',
+                icon: '💻',
+                badge: 'HOT',
+                period: '접수기간: 6월 25일(수) ~ 7월 15일(화)',
+                conditions: '• 생성형 AI 기술/도구를 활용하여 서비스 제안 시 MVP 개발\n• IT분야의 (예)인재를 희망하는 미취업자\n• 개인(1인) 또는 팀(2~5인) 참가 가능\n• 여성 · 기술 전문도시 서울 대상\n• 창의적 AI 기술 활용 문제해결 서비스 개발',
+                content: '🏆 시상 내역\n• 대상: 200만원 (1팀)\n• 최우수상: 150만원 (2팀)\n• 우수상: 100만원 (3팀)\n• 특별상: 특허 출원 지원\n\n📚 참가 혜택\n• 문제정의 컨설팅을 통한 체계적 AI 서비스 기획\n• 생성형 AI 멘토링을 통한 실무형 기술 구현\n• 다양한 AI 도구 활용법 집중 교육\n• 우수팀 창업 및 취업 연계 지원',
+                reviews: '⭐⭐⭐⭐⭐ 4.9/5.0 (156개 리뷰)\n\n"생성형 AI 도구 활용법을 체계적으로 배우고 정말 알찬 프로그램이었어요." - 김○○님 (AI 개발자)\n\n"미취업자 대상 취업 연계가 실질적이에요. 실제로 좋은 기업에 취업할 수 있었습니다!" - 박○○님 (프론트엔드 개발자)'
+            },
             'leadership-academy': {
                 title: '여성 리더십 아카데미',
                 icon: '💼',
@@ -1486,16 +1495,110 @@
         }
         
         function applyProgram(programId) {
-            alert(`${programId} 프로그램 신청이 완료되었습니다!\n\n추가 안내사항은 등록하신 이메일로 발송됩니다.`);
+            // alert 제거 - 조용히 처리
+            console.log(`${programId} 프로그램 신청 처리`);
         }
         
         function applyFromDetails() {
-            alert('신청이 완료되었습니다!\n\n추가 안내사항은 등록하신 이메일로 발송됩니다.');
+            // alert 제거 - 조용히 처리 후 팝업 닫기
             closeContentDetailsPopup();
         }
         
         function saveToWishlist() {
-            alert('찜 목록에 추가되었습니다! ❤️');
+            // 하트 애니메이션 효과
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 100px;
+                z-index: 10002;
+                animation: heartPop 0.8s ease-out forwards;
+                pointer-events: none;
+            `;
+            
+            // 애니메이션 CSS 추가
+            if (!document.getElementById('heart-animation-style')) {
+                const style = document.createElement('style');
+                style.id = 'heart-animation-style';
+                style.textContent = `
+                    @keyframes heartPop {
+                        0% {
+                            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                            opacity: 0;
+                        }
+                        50% {
+                            transform: translate(-50%, -50%) scale(1.3) rotate(-5deg);
+                            opacity: 1;
+                        }
+                        70% {
+                            transform: translate(-50%, -50%) scale(1.1) rotate(3deg);
+                        }
+                        100% {
+                            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                            opacity: 0;
+                        }
+                    }
+                    
+                    @keyframes floatUp {
+                        0% {
+                            transform: translate(-50%, -50%) scale(1);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translate(-50%, -250%) scale(0.3);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(heart);
+            
+            // 작은 하트들 추가
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    const smallHeart = document.createElement('div');
+                    smallHeart.innerHTML = '💕';
+                    const randomX = (Math.random() - 0.5) * 100;
+                    const randomDelay = Math.random() * 0.3;
+                    smallHeart.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: calc(50% + ${randomX}px);
+                        font-size: 30px;
+                        z-index: 10002;
+                        animation: floatUp 1s ease-out ${randomDelay}s forwards;
+                        pointer-events: none;
+                    `;
+                    document.body.appendChild(smallHeart);
+                    
+                    setTimeout(() => smallHeart.remove(), 1300);
+                }
+            }, 300);
+            
+            // 메인 하트 제거
+            setTimeout(() => heart.remove(), 800);
+            
+            // 찜하기 버튼 텍스트 변경 (있다면)
+            const wishlistBtn = document.querySelector('.btn-details-save');
+            if (wishlistBtn) {
+                const originalText = wishlistBtn.innerHTML;
+                wishlistBtn.innerHTML = '찜 완료! 💕';
+                wishlistBtn.style.background = '#ec4899';
+                wishlistBtn.style.color = 'white';
+                wishlistBtn.style.transform = 'scale(1.05)';
+                
+                setTimeout(() => {
+                    wishlistBtn.innerHTML = originalText;
+                    wishlistBtn.style.background = '';
+                    wishlistBtn.style.color = '';
+                    wishlistBtn.style.transform = '';
+                }, 2000);
+            }
         }
         
         // 페이지 로드 시 차트 초기화
