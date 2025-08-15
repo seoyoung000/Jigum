@@ -259,55 +259,57 @@
                 </div>
             </section>
 
-           <!-- 자산 성장 추이 및 월별 저축 그래프 -->
-            <section class="financial-charts-section" data-widget="charts">
+           <!-- 자산 성장 추이 -->
+            <section class="financial-charts-section" data-widget="asset-growth">
                 <div class="widget-handle">⋮</div>
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3>📈 자산 성장 추이</h3>
-                            <select class="chart-period-selector" onchange="updateAssetGrowthChart(this.value)">
-                                <option value="6months">6개월</option>
-                                <option value="1year" selected>1년</option>
-                                <option value="2years">2년</option>
-                                <option value="5years">5년</option>
-                            </select>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>📈 자산 성장 추이</h3>
+                        <select class="chart-period-selector" onchange="updateAssetGrowthChart(this.value)">
+                            <option value="6months">6개월</option>
+                            <option value="1year" selected>1년</option>
+                            <option value="2years">2년</option>
+                            <option value="5years">5년</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="assetGrowthChart"></canvas>
+                    </div>
+                    <div class="chart-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">현재 자산</span>
+                            <span class="summary-value">3,250만원</span>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="assetGrowthChart"></canvas>
-                        </div>
-                        <div class="chart-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">현재 자산</span>
-                                <span class="summary-value">3,250만원</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">1년 전 대비</span>
-                                <span class="summary-value positive">+485만원 (+17.6%)</span>
-                            </div>
+                        <div class="summary-item">
+                            <span class="summary-label">1년 전 대비</span>
+                            <span class="summary-value positive">+485만원 (+17.6%)</span>
                         </div>
                     </div>
-                    
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3>📊 월별 저축/투자 현황</h3>
-                            <select class="chart-period-selector" onchange="updateSavingsChart(this.value)">
-                                <option value="6months">6개월</option>
-                                <option value="1year" selected>1년</option>
-                            </select>
+                </div>
+            </section>
+
+            <!-- 월별 저축/투자 현황 -->
+            <section class="financial-charts-section" data-widget="savings-chart">
+                <div class="widget-handle">⋮</div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>📊 월별 저축/투자 현황</h3>
+                        <select class="chart-period-selector" onchange="updateSavingsChart(this.value)">
+                            <option value="6months">6개월</option>
+                            <option value="1year" selected>1년</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="monthlySavingsChart"></canvas>
+                    </div>
+                    <div class="chart-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">이번 달 저축</span>
+                            <span class="summary-value">85만원</span>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="monthlySavingsChart"></canvas>
-                        </div>
-                        <div class="chart-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">이번 달 저축</span>
-                                <span class="summary-value">85만원</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">월 평균 저축</span>
-                                <span class="summary-value">78만원</span>
-                            </div>
+                        <div class="summary-item">
+                            <span class="summary-label">월 평균 저축</span>
+                            <span class="summary-value">78만원</span>
                         </div>
                     </div>
                 </div>
@@ -581,9 +583,10 @@
                 <div class="category-tabs">
                     <button class="cat-tab active" onclick="filterWomenContent('all')">전체</button>
                     <button class="cat-tab" onclick="filterWomenContent('policy')">정책</button>
-                    <button class="cat-tab" onclick="filterWomenContent('lecture')">강연</button>
-                    <button class="cat-tab" onclick="filterWomenContent('video')">영상</button>
+                    <button class="cat-tab" onclick="filterWomenContent('lecture')">교육/강연</button>
+                    <button class="cat-tab" onclick="filterWomenContent('hackathon')">대회</button>
                     <button class="cat-tab" onclick="filterWomenContent('mentoring')">멘토링</button>
+                    <button class="cat-tab" onclick="filterWomenContent('video')">영상</button>
                     <button class="cat-tab" onclick="filterWomenContent('event')">이벤트</button>
                 </div>
             
@@ -669,25 +672,25 @@
                         <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('startup-fund')">신청하기</button>
                     </div>
                 
-                    <!-- 강연 카테고리 콘텐츠 -->
-                    <div class="expanded-card" data-category="lecture" onclick="showContentDetails('women-tech-2025')">
+                    <!-- 대회/해커톤 카테고리 콘텐츠 -->
+                    <div class="expanded-card" data-category="hackathon" onclick="showContentDetails('women-tech-2025')">
                         <div class="card-header">
-                            <span class="card-icon">🎤</span>
-                            <span class="card-badge new">NEW</span>
+                            <span class="card-icon">💻</span>
+                            <span class="card-badge hot">HOT</span>
                         </div>
                         <div class="card-content">
-                            <h4>Women in Tech 2025</h4>
-                            <p class="card-desc">글로벌 여성 기술 리더들의 특별 강연</p>
+                            <h4>2025 서울 우먼테크 해커톤</h4>
+                            <p class="card-desc">생성형 AI 활용 사회문제 해결 해커톤</p>
                             <div class="card-meta">
-                                <span class="meta-item">📅 2025.2.20</span>
-                                <span class="meta-item">💰 무료</span>
+                                <span class="meta-item">📅 접수 6.25~7.15</span>
+                                <span class="meta-item">🏆 총 상금 650만원</span>
                                 <div class="rating">
                                     <span>⭐ 4.9</span>
-                                    <span class="review-count">(312 리뷰)</span>
+                                    <span class="review-count">(156 리뷰)</span>
                                 </div>
                             </div>
                         </div>
-                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('women-tech-2025')">등록하기</button>
+                        <button class="expanded-btn" onclick="event.stopPropagation(); applyProgram('women-tech-2025')">신청하기</button>
                     </div>
                     
                     <div class="expanded-card" data-category="lecture" onclick="showContentDetails('finance-summit')">
@@ -1449,7 +1452,7 @@
                 badge: 'HOT',
                 period: '접수기간: 6월 25일(수) ~ 7월 15일(화)',
                 conditions: '• 생성형 AI 기술/도구를 활용하여 서비스 제안 시 MVP 개발\n• IT분야의 (예)인재를 희망하는 미취업자\n• 개인(1인) 또는 팀(2~5인) 참가 가능\n• 여성 · 기술 전문도시 서울 대상\n• 창의적 AI 기술 활용 문제해결 서비스 개발',
-                content: '🏆 시상 내역\n• 대상: 200만원 (1팀)\n• 최우수상: 150만원 (2팀)\n• 우수상: 100만원 (3팀)\n• 특별상: 특허 출원 지원\n\n📚 참가 혜택\n• 문제정의 컨설팅을 통한 체계적 AI 서비스 기획\n• 생성형 AI 멘토링을 통한 실무형 기술 구현\n• 다양한 AI 도구 활용법 집중 교육\n• 우수팀 창업 및 취업 연계 지원',
+                content: '🏆 시상 내역\n• 대상: 200만원 (1팀)\n• 최우수상: 150만원 (2팀)\n• 우수상: 100만원 (3팀)\n• 특별상: 특허 출원 지원\n\n📚 참가 혜택\n• 문제정의 컨설팅을 통한 체계적 AI 서비스 기획\n• 생성형 AI 멘토링을 통한 실무형 기술 구현\n• 다양한 AI 도구 활용법 집중 교육\n• 전문가 멘토링 및 AI 도구 실비 지원',
                 reviews: '⭐⭐⭐⭐⭐ 4.9/5.0 (156개 리뷰)\n\n"생성형 AI 도구 활용법을 체계적으로 배우고 정말 알찬 프로그램이었어요." - 김○○님 (AI 개발자)\n\n"미취업자 대상 취업 연계가 실질적이에요. 실제로 좋은 기업에 취업할 수 있었습니다!" - 박○○님 (프론트엔드 개발자)'
             },
             'leadership-academy': {

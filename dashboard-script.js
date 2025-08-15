@@ -1427,6 +1427,39 @@ function enableMainSortable() {
             mainSortable.destroy();
         }
         
+        // 모든 섹션에 data-widget 속성이 있는지 확인하고 추가
+        const sections = mainContent.querySelectorAll('section');
+        sections.forEach((section, index) => {
+            if (!section.dataset.widget) {
+                // data-widget 속성이 없으면 추가
+                if (section.classList.contains('welcome-section')) {
+                    section.dataset.widget = 'welcome';
+                } else if (section.classList.contains('mission-accordion-section')) {
+                    section.dataset.widget = 'mission';
+                } else if (section.classList.contains('financial-charts-section')) {
+                    // 차트 섹션 구분
+                    const title = section.querySelector('h3');
+                    if (title && title.textContent.includes('자산 성장')) {
+                        section.dataset.widget = 'asset-growth';
+                    } else if (title && title.textContent.includes('월별 저축')) {
+                        section.dataset.widget = 'savings-chart';
+                    }
+                } else if (section.classList.contains('women-growth-section')) {
+                    section.dataset.widget = 'women-growth';
+                } else {
+                    section.dataset.widget = 'section-' + index;
+                }
+            }
+            
+            // widget-handle이 없으면 추가
+            if (!section.querySelector('.widget-handle')) {
+                const handle = document.createElement('div');
+                handle.className = 'widget-handle';
+                handle.innerHTML = '⋮';
+                section.insertBefore(handle, section.firstChild);
+            }
+        });
+        
         mainSortable = new Sortable(mainContent, {
             animation: 150,
             handle: '.widget-handle',
