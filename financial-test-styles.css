@@ -224,11 +224,13 @@ body {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
+    color: #000000;
 }
 
 .option-desc {
     font-size: 12px;
     opacity: 0.8;
+    color: #000000;
 }
 
 .options-vertical {
