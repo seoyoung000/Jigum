@@ -1150,3 +1150,207 @@ body {
         padding: 20px;
     }
 }
+
+/* 투자 성향 MBTI 스타일 그래프 */
+.investment-traits-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+    border: 1px solid #e2e8f0;
+}
+
+.investment-traits-section h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.traits-subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.traits-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.trait-axis {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #f1f5f9;
+}
+
+.axis-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.axis-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.axis-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.axis-left,
+.axis-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.trait-icon {
+    font-size: 24px;
+}
+
+.trait-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.axis-progress {
+    flex: 1;
+    height: 12px;
+    position: relative;
+}
+
+.progress-track {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #3b82f6 0%, #e2e8f0 50%, #ef4444 100%);
+    border-radius: 6px;
+    position: relative;
+}
+
+.progress-indicator {
+    position: absolute;
+    top: -4px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border: 3px solid #2563eb;
+    transform: translateX(-50%);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+}
+
+.axis-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.result-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.result-score {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.traits-summary {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #f1f5f9;
+}
+
+.summary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.badge-icon {
+    font-size: 20px;
+}
+
+.summary-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #64748b;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 640px) {
+    .investment-traits-section {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .investment-traits-section h3 {
+        font-size: 20px;
+    }
+    
+    .axis-bar {
+        gap: 12px;
+    }
+    
+    .axis-left,
+    .axis-right {
+        min-width: 80px;
+    }
+    
+    .trait-icon {
+        font-size: 20px;
+    }
+    
+    .trait-label {
+        font-size: 12px;
+    }
+    
+    .summary-badge {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    
+    .summary-description {
+        font-size: 14px;
+    }
+}

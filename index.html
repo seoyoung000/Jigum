@@ -11,29 +11,27 @@
     <header class="header">
         <div class="nav-container">
             <div class="logo">
-                <span>💸</span>
                 <span>지금</span>
-                <a href="dashboard.html" class="btn-start">임시 버튼</a>
             </div>
             <nav class="nav-menu">
                 <a href="#features" class="nav-link">서비스 소개</a>
                 <a href="#types" class="nav-link">투자 유형</a>
                 <a href="#" class="nav-link" onclick="showLogin(); return false;">로그인</a>
-                <a href="financial-test-final.html" class="btn-start">노후 대비 시작</a>
+                <a href="dashboard.html" class="btn-start">노후 대비 시작</a>
             </nav>
         </div>
     </header>
 
     <!-- 히어로 섹션 -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
+        <div class="hero-container-center">
+            <div class="hero-content-center">
                 <h1>
                     <span class="highlight">지금</span>과 함께<br>
                     20년 후, 당당한 나로
                 </h1>
                 <p class="hero-subtitle">
-                    ‘여성의 금융적 사회참여 증진을 위해 금융 및 정책 정보를 제공하고<br>
+                    '여성의 금융적 사회참여 증진을 위해 금융 및 정책 정보를 제공하고<br>
                     <strong>반값노후 </strong>실천을 돕는 프로그램
                 </p>
                 <div class="hero-buttons">
@@ -41,25 +39,10 @@
                     <a href="#statistics" class="btn-secondary">자세히 알아보기</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="floating-card floating-card-1">
-                    <div style="font-size: 24px; margin-bottom: 5px;">📈</div>
-                    <div style="font-size: 14px; font-weight: 600;">수익률 +1502.3%</div>
-                </div>
-                <div class="floating-card floating-card-2">
-                    <div style="font-size: 24px; margin-bottom: 5px;">💰</div>
-                    <div style="font-size: 14px; font-weight: 600;">부자가 되</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #ffffff, #f8fafc); padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08);">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <div style="font-size: 64px;">👩‍💼</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">✨ 여성 전용 AI 매니저</div>
-                        <div style="font-size: 14px; color: #64748b;">"야 너두 할 수 잇어"</div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="scroll-down" onclick="document.getElementById('statistics').scrollIntoView({behavior: 'smooth'})">
+            <div class="scroll-down-text">SCROLL</div>
+            <div class="scroll-down-arrow"></div>
         </div>
     </section>
 
@@ -111,7 +94,7 @@
                 <div class="retirement-compound-container">
                     <div class="stats-header">
                         <h3>5년만 늦어져도 5억원 차이</h3>
-                        <p>복리의 마법은 시간이 핵심입니다.➱ 지금ิ ㅅ1작핛எㅅㅔ요!➼</p>
+                        <p>복리의 마법은 시간이 핵심입니다. 지금 시작하세요.</p>
                     </div>
                     
                     <div class="stats-content">
@@ -121,7 +104,7 @@
                                 <div class="stat-label">퇴직 후 생활해야 할 기간</div>
                                 <div class="stat-source">여성 90.7세 - 퇴직 49.4세</div>
                             </div>
-                            <div class="stat-vs">😱</div>
+                            <div class="stat-vs"></div>
                             <div class="stat-highlight shock">
                                 <div class="stat-big-number">10억원</div>
                                 <div class="stat-label">5년 늦게 시작하면 잃는 돈</div>
@@ -153,8 +136,8 @@
                     
                     <div class="stat-insight">
                         <div class="insight-text">
-                            <strong>같은 고민을 하는 여성이 96%!</strong><br>
-                            하지만 '지금'과 함께라면 걱정 없어요 💪
+                            <strong>🚨노후 국민연금 급여가 너무 적을 것 같다 91.2%🚨</strong><br>
+                            한국여성정책연구원 설문조사 (2024년)<br>
                         </div>
                     </div>
                 </div>
@@ -164,7 +147,7 @@
     <section class="features" id="features">
         <div class="features-container">
             <h2 class="section-title">💪 지금이 걱정을 해결해드릴게요!</h2>
-            <p class="section-subtitle">여성의 고민을 가장 잘 아는 AI 언니가 단계별로 도와드려요</p>
+            <p class="section-subtitle">여성의 고민을 가장 잘 아는 AI 금융 매니저가 단계별로 도와드려요</p>
             
             <div class="solution-flow">
                 <div class="flow-step">
@@ -195,7 +178,7 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <div class="step-icon">📱</div>
-                        <h3>AI 언니와 함께 관리</h3>
+                        <h3>AI 금융 매니저와 함께 관리</h3>
                         <p>"여성 정책·혜택 자동 분석 및 행동 실천 프로그램 제공해 드려요"</p>
                         <div class="step-benefit">✨ 여성 전용 커뮤니티에서 정보 공유</div>
                     </div>
@@ -207,11 +190,11 @@
     <!-- 투자 유형 섹션 -->
     <section class="types" id="types">
         <div class="types-container">
-            <h2 class="section-title">💡 우리 이렇게 해보자! 너의 투자 DNA부터 알아봐~!</h2>
+            <h2 class="section-title">💡 나의 투자 DNA부터 알아봐요~</h2>
             <p class="section-subtitle">나에게 딱 맞는 투자 스타일을 찾으면 부자되는 길이 보여요! 💰</p>
             
             <div class="dna-test-intro">
-                <h3>🔬 STEP 1: 나의 투자 DNA 찾기</h3>
+                <h3> STEP 1: 나의 투자 DNA 찾기</h3>
                 <p class="dna-subtitle">아래 3가지 핵심 축에서 나는 어디에 가까운가요?</p>
                 
                 <div class="dna-axes-simple">
@@ -219,7 +202,7 @@
                         <div class="dna-box-header">
                             <p>위험 성향</p>
                         </div>
-                        <div class="dna-box-options">
+                        <div class="dna-box-options-horizontal">
                             <div class="option-item">
                                 <div class="option-main">
                                     <span class="option-icon">🛡️</span>
@@ -227,7 +210,6 @@
                                 </div>
                                 <span class="option-caption">"안전빵이 최고"</span>
                             </div>
-                            <div class="option-vs">vs</div>
                             <div class="option-item">
                                 <div class="option-main">
                                     <span class="option-icon">🚀</span>
@@ -242,7 +224,7 @@
                         <div class="dna-box-header">
                             <p>투자 기간</p>
                         </div>
-                        <div class="dna-box-options">
+                        <div class="dna-box-options-horizontal">
                             <div class="option-item">
                                 <div class="option-main">
                                     <span class="option-icon">⏰</span>
@@ -265,7 +247,7 @@
                         <div class="dna-box-header">
                             <p>투자 목적</p>
                         </div>
-                        <div class="dna-box-options">
+                        <div class="dna-box-options-horizontal">
                             <div class="option-item">
                                 <div class="option-main">
                                     <span class="option-icon">💰</span>
@@ -284,13 +266,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="cta-container">
-                <a href="financial-test-final.html" class="btn-find-type">
-                    🚀 내 유형 찾기!
-                </a>
-                <p class="cta-subtitle">이미 <strong>23,456명</strong>이 자신만의 유형을 찾았어요!</p>
             </div>
             
             <h3 class="personas-title">🌈 9가지 투자 페르소나가 있어요!</h3>     
@@ -392,6 +367,13 @@
             </div>
     </section>
 
+    <div class="cta-container">
+                <a href="financial-test-final.html" class="btn-find-type">
+                    🚀 내 유형 찾기!
+                </a>
+                <p class="cta-subtitle">이미 <strong>21,346명</strong>이 자신만의 유형을 찾았어요!</p>
+            </div>
+
     <!-- 프리미엄 요금제 섹션 -->
     <section class="premium">
         <div class="premium-container">
@@ -441,7 +423,7 @@
                     </div>
                     <div class="price-features">
                         <div class="price-feature">✓ 프리미엄 모든 혜택</div>
-                        <div class="price-feature special">⭐ 멋진언니 1:1 상담</div>
+                        <div class="price-feature special">AI 금융 매니저와 1:1 상담</div>
                         <div class="price-feature">✓ 매일 시장 브리핑</div>
                         <div class="price-feature">✓ VIP 전용 커뮤니티</div>
                         <div class="price-feature">✓ 오프라인 세미나</div>
@@ -458,7 +440,7 @@
         <div class="cta-content">
             <h2>지금 시작하면 20년 후 50억원</h2>
             <p>5년 늦게 시작하면 10억원 차이가 납니다</p>
-            <span class="cta-highlight">⏰ 지금이 가장 빠른 시작입니다</span>
+            <span class="cta-highlight">지금이 가장 빠른 시작입니다</span>
             <a href="financial-test-final.html" class="btn-white">지금 바로 시작하기</a>
         </div>
     </section>

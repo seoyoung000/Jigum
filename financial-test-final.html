@@ -643,6 +643,99 @@
                         </div>
                     </div>
 
+                    <!-- 투자 성향 MBTI 스타일 그래프 -->
+                    <div class="investment-traits-section">
+                        <h3>💡 나의 투자 성향 DNA</h3>
+                        <p class="traits-subtitle">당신의 투자 DNA를 MBTI 스타일로 분석했어요!</p>
+                        
+                        <div class="traits-chart-container">
+                            <div class="trait-axis">
+                                <div class="axis-header">
+                                    <span class="axis-title">위험 성향</span>
+                                </div>
+                                <div class="axis-bar">
+                                    <div class="axis-left">
+                                        <span class="trait-icon">🛡️</span>
+                                        <span class="trait-label">안전추구형</span>
+                                    </div>
+                                    <div class="axis-progress">
+                                        <div class="progress-track">
+                                            <div class="progress-indicator" id="riskIndicator" style="left: 30%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="axis-right">
+                                        <span class="trait-label">모험추구형</span>
+                                        <span class="trait-icon">🚀</span>
+                                    </div>
+                                </div>
+                                <div class="axis-result" id="riskResult">
+                                    <span class="result-text">안전 중시 성향</span>
+                                    <span class="result-score">30%</span>
+                                </div>
+                            </div>
+
+                            <div class="trait-axis">
+                                <div class="axis-header">
+                                    <span class="axis-title">투자 기간</span>
+                                </div>
+                                <div class="axis-bar">
+                                    <div class="axis-left">
+                                        <span class="trait-icon">⏰</span>
+                                        <span class="trait-label">단기집중형</span>
+                                    </div>
+                                    <div class="axis-progress">
+                                        <div class="progress-track">
+                                            <div class="progress-indicator" id="timeIndicator" style="left: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="axis-right">
+                                        <span class="trait-label">장기성장형</span>
+                                        <span class="trait-icon">🌱</span>
+                                    </div>
+                                </div>
+                                <div class="axis-result" id="timeResult">
+                                    <span class="result-text">장기 투자 성향</span>
+                                    <span class="result-score">70%</span>
+                                </div>
+                            </div>
+
+                            <div class="trait-axis">
+                                <div class="axis-header">
+                                    <span class="axis-title">투자 목적</span>
+                                </div>
+                                <div class="axis-bar">
+                                    <div class="axis-left">
+                                        <span class="trait-icon">💰</span>
+                                        <span class="trait-label">수익극대화형</span>
+                                    </div>
+                                    <div class="axis-progress">
+                                        <div class="progress-track">
+                                            <div class="progress-indicator" id="purposeIndicator" style="left: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="axis-right">
+                                        <span class="trait-label">목표달성형</span>
+                                        <span class="trait-icon">🎯</span>
+                                    </div>
+                                </div>
+                                <div class="axis-result" id="purposeResult">
+                                    <span class="result-text">균형잡힌 목적</span>
+                                    <span class="result-score">45%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="traits-summary">
+                            <div class="summary-badge" id="traitsSummary">
+                                <span class="badge-icon">✨</span>
+                                <span class="badge-text">안전한 장기 균형형</span>
+                            </div>
+                            <p class="summary-description" id="traitsDescription">
+                                안정적인 투자를 선호하며, 장기적인 시각으로 균형잡힌 목표를 추구하는 현명한 투자자입니다.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="portfolio-section">
                         <h3>맞춤 포트폴리오</h3>
                         <div class="portfolio-container">
@@ -657,19 +750,48 @@
 
                     <div class="growth-section">
                         <h3>예상 자산 성장 그래프</h3>
+                        
+                        <!-- 시작 시점 선택 버튼 -->
+                        <div class="delay-buttons" style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+                            <button class="delay-btn active" onclick="updateDelayChart(0)" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">지금 시작</button>
+                            <button class="delay-btn" onclick="updateDelayChart(5)" style="padding: 8px 16px; background: #e5e7eb; color: #6b7280; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">5년 후 시작</button>
+                            <button class="delay-btn" onclick="updateDelayChart(10)" style="padding: 8px 16px; background: #e5e7eb; color: #6b7280; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">10년 후 시작</button>
+                            <button class="delay-btn" onclick="updateDelayChart(15)" style="padding: 8px 16px; background: #e5e7eb; color: #6b7280; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s;">15년 후 시작</button>
+                        </div>
+                        
                         <div class="growth-chart-container">
                             <canvas id="growthChart"></canvas>
                         </div>
+                        
+                        <!-- 시작 시점별 비교 정보 (경고창) - 그래프 바로 아래 -->
+                        <div class="delay-comparison" id="delayComparison" style="margin-top: 20px; margin-bottom: 20px;">
+                            <div class="comparison-alert" style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px; padding: 20px; display: flex; gap: 15px; align-items: start;">
+                                <span class="alert-icon" style="font-size: 24px;">⚠️</span>
+                                <div class="alert-content">
+                                    <p class="alert-title" style="font-weight: 600; color: #92400e; margin-bottom: 8px;">투자를 미루면 얼마나 더 넣어야 할까요?</p>
+                                    <p class="alert-message" id="delayMessage" style="color: #78350f;">지금 바로 시작하는 것이 가장 효율적입니다!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="growth-comparison">
                             <div class="comparison-item now">
                                 <p class="comparison-label">지금 시작하면</p>
                                 <p class="comparison-amount" id="nowAmount">20년 후 <strong id="nowAmount20">3.2억원</strong></p>
-                                <p class="comparison-amount" style="font-size: 14px; margin-top: 4px;">10년 후 <span style="color: #3498db; font-weight: 600;">1.5억원</span></p>
+                                <p class="comparison-amount" style="font-size: 14px; margin-top: 4px;">10년 후 <span id="nowAmount10" style="color: #3498db; font-weight: 600;">1.5억원</span></p>
                             </div>
                             <div class="comparison-item later">
-                                <p class="comparison-label">5년 후 시작하면</p>
+                                <p class="comparison-label" id="laterLabel">5년 후 시작하면</p>
                                 <p class="comparison-amount" id="laterAmount">20년 후 <strong id="laterAmount20">1.8억원</strong></p>
-                                <p class="comparison-amount" style="font-size: 14px; margin-top: 4px;">10년 후 <span style="color: #6c757d; font-weight: 600;">8천만원</span></p>
+                                <p class="comparison-amount" style="font-size: 14px; margin-top: 4px;">10년 후 <span id="laterAmount10" style="color: #6c757d; font-weight: 600;">8천만원</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- 추가 비교 차트 (막대그래프) -->
+                        <div class="comparison-chart-section" style="margin-top: 40px;">
+                            <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 20px;">💰 같은 목표 달성을 위한 필요 저축액 비교</h4>
+                            <div class="chart-container-small" style="height: 300px;">
+                                <canvas id="comparisonChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -725,6 +847,10 @@
         let growthChart = null;
         let portfolioChart = null;
         
+        // 차트 변수 추가
+        let delayChart = null;
+        let barChart = null;
+        
         // 나이 옵션
         const ageOptions = ['20대 초반', '20대 중반', '20대 후반', '30대 초반', '30대 중반', '30대 후반'];
         
@@ -740,6 +866,10 @@
         function confirmAge() {
             const value = document.getElementById('ageSlider').value;
             selectOption(1, ageOptions[value]);
+            // 0.5초 후 자동으로 다음 질문으로 이동
+            setTimeout(() => {
+                goToNext();
+            }, 500);
         }
         
         // 연소듍 슬라이더 업데이트
@@ -751,6 +881,10 @@
         function confirmIncome() {
             const value = document.getElementById('incomeSlider').value;
             selectOption(4, incomeOptions[value]);
+            // 0.5초 후 자동으로 다음 질문으로 이동
+            setTimeout(() => {
+                goToNext();
+            }, 500);
         }
 
         // 색상 팔레트
@@ -1036,6 +1170,13 @@
             if (nextBtn) {
                 nextBtn.disabled = false;
             }
+            
+            // 0.5초 후 자동으로 다음 질문으로 이동 (질문 2, 3만)
+            if (questionNum === 2 || questionNum === 3) {
+                setTimeout(() => {
+                    goToNext();
+                }, 500);
+            }
         }
 
         function goToPrevious() {
@@ -1101,6 +1242,11 @@
                 // 다음 버튼 활성화
                 document.getElementById('nextBtn5').disabled = false;
                 answers[5] = style;
+                
+                // 1초 후 자동으로 다음 질문으로 이동
+                setTimeout(() => {
+                    goToNext();
+                }, 1000);
             }
         }
         
@@ -1267,17 +1413,11 @@
             }
 
             const monthlyInvestment = 500000; // 월 50만원 가정
-            const years = Array.from({length: 21}, (_, i) => i); // 0~20년
+            const years = Array.from({length: 31}, (_, i) => i); // 0~30년으로 확장
             
             const nowData = years.map(year => {
                 if (year === 0) return 0;
                 return calculateGrowth(monthlyInvestment, annualReturn, year) / 10000; // 만원 단위
-            });
-            
-            const laterData = years.map(year => {
-                if (year < 5) return 0;
-                if (year === 5) return 0;
-                return calculateGrowth(monthlyInvestment, annualReturn, year - 5) / 10000; // 만원 단위
             });
 
             growthChart = new Chart(ctx, {
@@ -1287,25 +1427,16 @@
                     datasets: [{
                         label: '지금 시작',
                         data: nowData,
-                        borderColor: '#3498db',
-                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#3498db',
+                        borderColor: '#4A90E2',
+                        backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                        fill: false,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#4A90E2',
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
-                        pointRadius: 4
-                    }, {
-                        label: '5년 후 시작',
-                        data: laterData,
-                        borderColor: '#95a5a6',
-                        backgroundColor: 'rgba(149, 165, 166, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#95a5a6',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 4
+                        pointRadius: 4,
+                        pointHoverRadius: 6
                     }]
                 },
                 options: {
@@ -1453,6 +1584,9 @@
             }
             document.getElementById('policyList').innerHTML = policyHTML;
             
+            // 투자 성향 그래프 업데이트
+            updateInvestmentTraitsChart();
+            
             // 포트폴리오 리스트 생성
             let portfolioHTML = '';
             result.portfolio.forEach((item, index) => {
@@ -1481,6 +1615,7 @@
             setTimeout(() => {
                 createPortfolioChart(result.portfolio);
                 createGrowthChart(result.annualReturn);
+                createComparisonChart(result.annualReturn);
             }, 100);
             
             showScreen('resultScreen');
@@ -1494,6 +1629,313 @@
             alert('공유 기능이 준비 중입니다!');
         }
 
+        // 투자 성향 그래프 업데이트 함수
+        function updateInvestmentTraitsChart() {
+            // 답변 기반으로 성향 점수 계산
+            const riskScore = calculateRiskScore();
+            const timeScore = calculateTimeScore();
+            const purposeScore = calculatePurposeScore();
+            
+            // 위험 성향 업데이트 (0-100% 스케일)
+            const riskPercentage = riskScore;
+            document.getElementById('riskIndicator').style.left = riskPercentage + '%';
+            
+            const riskText = riskPercentage < 30 ? '안전 중시 성향' : 
+                           riskPercentage < 70 ? '균형잡힌 성향' : '모험 추구 성향';
+            document.getElementById('riskResult').innerHTML = `
+                <span class="result-text">${riskText}</span>
+                <span class="result-score">${riskPercentage}%</span>
+            `;
+            
+            // 투자 기간 업데이트
+            const timePercentage = timeScore;
+            document.getElementById('timeIndicator').style.left = timePercentage + '%';
+            
+            const timeText = timePercentage < 30 ? '단기 집중 성향' : 
+                           timePercentage < 70 ? '중기 계획 성향' : '장기 투자 성향';
+            document.getElementById('timeResult').innerHTML = `
+                <span class="result-text">${timeText}</span>
+                <span class="result-score">${timePercentage}%</span>
+            `;
+            
+            // 투자 목적 업데이트
+            const purposePercentage = purposeScore;
+            document.getElementById('purposeIndicator').style.left = purposePercentage + '%';
+            
+            const purposeText = purposePercentage < 30 ? '수익 극대화형' : 
+                              purposePercentage < 70 ? '균형잡힌 목적' : '목표 달성형';
+            document.getElementById('purposeResult').innerHTML = `
+                <span class="result-text">${purposeText}</span>
+                <span class="result-score">${purposePercentage}%</span>
+            `;
+            
+            // 종합 성향 요약
+            const summaryType = getSummaryType(riskPercentage, timePercentage, purposePercentage);
+            document.getElementById('traitsSummary').innerHTML = `
+                <span class="badge-icon">✨</span>
+                <span class="badge-text">${summaryType.name}</span>
+            `;
+            document.getElementById('traitsDescription').textContent = summaryType.description;
+        }
+        
+        // 위험 성향 점수 계산 (답변 기반)
+        function calculateRiskScore() {
+            let score = 50; // 기본값
+            
+            // 투자 이해도 기반 (answers[2])
+            if (answers[2] === '전혀 모르겠어요') score -= 20;
+            else if (answers[2] === '조금 알아요') score -= 10;
+            else if (answers[2] === '어느 정도 알아요') score += 0;
+            else if (answers[2] === '잘 알고 있어요') score += 15;
+            
+            // 투자 경험 기반 (answers[3])
+            if (answers[3] === '전혀 없어요') score -= 15;
+            else if (answers[3] === '조금 있어요') score += 0;
+            else if (answers[3] === '어느 정도 있어요') score += 10;
+            else if (answers[3] === '많이 있어요') score += 20;
+            
+            // 소득 기반 (answers[4])
+            if (answers[4] === '2천만원 미만') score -= 10;
+            else if (answers[4] === '5천만원 이상') score += 10;
+            
+            return Math.max(0, Math.min(100, score));
+        }
+        
+        // 투자 기간 점수 계산
+        function calculateTimeScore() {
+            let score = 50; // 기본값
+            
+            // 연령대 기반 (answers[1])
+            if (answers[1] === '20대 초반' || answers[1] === '20대 중반') score += 20;
+            else if (answers[1] === '20대 후반' || answers[1] === '30대 초반') score += 10;
+            else if (answers[1] === '30대 중반' || answers[1] === '30대 후반') score += 0;
+            
+            // 금융 관리 스타일 기반 (answers[5])
+            if (answers[5] === '계획적이고 체계적으로') score += 15;
+            else if (answers[5] === '필요할 때마다') score -= 10;
+            
+            return Math.max(0, Math.min(100, score));
+        }
+        
+        // 투자 목적 점수 계산
+        function calculatePurposeScore() {
+            let score = 50; // 기본값
+            
+            // 선택된 목적들 기반
+            if (selectedPurposes.includes('노후 준비')) score += 15;
+            if (selectedPurposes.includes('자녀 교육비')) score += 10;
+            if (selectedPurposes.includes('내집마련')) score += 10;
+            if (selectedPurposes.includes('자산 증식')) score -= 10;
+            if (selectedPurposes.includes('창업 자금')) score -= 5;
+            
+            return Math.max(0, Math.min(100, score));
+        }
+        
+        // 종합 성향 타입 결정
+        function getSummaryType(risk, time, purpose) {
+            if (risk < 40 && time > 60 && purpose > 50) {
+                return {
+                    name: '안전한 장기 목표형',
+                    description: '안정적인 투자를 선호하며, 장기적인 시각으로 명확한 목표를 추구하는 현명한 투자자입니다.'
+                };
+            } else if (risk > 60 && time < 40) {
+                return {
+                    name: '적극적 단기 수익형',
+                    description: '높은 수익을 위해 위험을 감수할 수 있으며, 빠른 성과를 원하는 공격적인 투자자입니다.'
+                };
+            } else if (risk > 60 && time > 60) {
+                return {
+                    name: '모험적 장기 성장형',
+                    description: '장기적으로 큰 성장을 위해 위험을 감수할 수 있는 야심찬 투자자입니다.'
+                };
+            } else if (risk < 40 && purpose < 40) {
+                return {
+                    name: '안전한 수익 추구형',
+                    description: '안정적인 수익을 통해 자산을 꾸준히 증식시키고자 하는 신중한 투자자입니다.'
+                };
+            } else {
+                return {
+                    name: '균형잡힌 투자형',
+                    description: '위험과 안정성의 균형을 잘 맞추며, 합리적인 투자 결정을 내리는 현명한 투자자입니다.'
+                };
+            }
+        }
+
+        // 지연 차트 업데이트 함수 추가
+        function updateDelayChart(delayYears) {
+            // 버튼 활성화 상태 변경
+            document.querySelectorAll('.delay-btn').forEach(btn => {
+                btn.style.background = '#e5e7eb';
+                btn.style.color = '#6b7280';
+            });
+            
+            if (event && event.target) {
+                event.target.style.background = '#2563eb';
+                event.target.style.color = 'white';
+            } else {
+                const activeBtn = document.querySelector(`[onclick="updateDelayChart(${delayYears})"]`);
+                if (activeBtn) {
+                    activeBtn.style.background = '#2563eb';
+                    activeBtn.style.color = 'white';
+                }
+            }
+            
+            // 경고 메시지 업데이트 (더 자세한 메시지)
+            const delayMessage = document.getElementById('delayMessage');
+            const monthlyInvestment = 500000;
+            const annualReturn = 0.075;
+            
+            if (delayYears === 0) {
+                delayMessage.innerHTML = '지금 바로 시작하는 것이 가장 효율적입니다! 💪';
+            } else {
+                const targetAsset = calculateGrowth(monthlyInvestment, annualReturn, 30);
+                const requiredSaving = calculateRequiredMonthlySaving(targetAsset, annualReturn, 30 - delayYears);
+                const additionalAmount = requiredSaving - monthlyInvestment;
+                const percentIncrease = ((additionalAmount / monthlyInvestment) * 100).toFixed(0);
+                
+                delayMessage.innerHTML = `
+                    <strong>${delayYears}년 후에 시작하면</strong><br>
+                    같은 목표 달성을 위해 매월 <strong>${formatAmount(additionalAmount)}</strong> 더 넣어야 해요!<br>
+                    <span style="color: #FF6B6B; font-weight: 600;">(현재보다 ${percentIncrease}% 더 많은 금액)</span>
+                `;
+            }
+            
+            // 비교 섹션 업데이트
+            const laterLabel = document.getElementById('laterLabel');
+            const laterAmount20 = document.getElementById('laterAmount20');
+            const laterAmount10 = document.getElementById('laterAmount10');
+            const nowAmount20 = document.getElementById('nowAmount20');
+            const nowAmount10 = document.getElementById('nowAmount10');
+            
+            if (laterLabel) {
+                laterLabel.textContent = delayYears === 0 ? '5년 후 시작하면' : `${delayYears}년 후 시작하면`;
+            }
+            
+            // 지금 시작 금액 업데이트
+            const now10Years = calculateGrowth(monthlyInvestment, annualReturn, 10);
+            const now20Years = calculateGrowth(monthlyInvestment, annualReturn, 20);
+            if (nowAmount10) nowAmount10.textContent = formatAmount(now10Years);
+            if (nowAmount20) nowAmount20.textContent = formatAmount(now20Years);
+            
+            // 지연 시작 금액 업데이트
+            if (delayYears > 0) {
+                const later10Years = delayYears >= 10 ? 0 : calculateGrowth(monthlyInvestment, annualReturn, 10 - delayYears);
+                const later20Years = delayYears >= 20 ? 0 : calculateGrowth(monthlyInvestment, annualReturn, 20 - delayYears);
+                if (laterAmount10) laterAmount10.textContent = formatAmount(later10Years);
+                if (laterAmount20) laterAmount20.textContent = formatAmount(later20Years);
+            } else {
+                // delayYears가 0이면 5년 후 기본값 표시
+                const later10Years = calculateGrowth(monthlyInvestment, annualReturn, 5);
+                const later20Years = calculateGrowth(monthlyInvestment, annualReturn, 15);
+                if (laterAmount10) laterAmount10.textContent = formatAmount(later10Years);
+                if (laterAmount20) laterAmount20.textContent = formatAmount(later20Years);
+            }
+            
+            // 그래프 데이터 업데이트 - 3개 라인 표시
+            if (growthChart) {
+                const years = Array.from({length: 31}, (_, i) => i);
+                
+                // 지금 시작 데이터
+                const nowData = years.map(year => {
+                    if (year === 0) return 0;
+                    return calculateGrowth(monthlyInvestment, annualReturn, year) / 10000;
+                });
+                
+                // 지연 시작 데이터 (현재 저축액)
+                const laterData = years.map(year => {
+                    if (year < delayYears) return 0;
+                    return calculateGrowth(monthlyInvestment, annualReturn, year - delayYears) / 10000;
+                });
+                
+                // 기존 데이터셋 업데이트
+                growthChart.data.datasets[0].data = nowData;
+                
+                if (delayYears > 0) {
+                    // 지연 시작 라인이 없으면 추가
+                    if (growthChart.data.datasets.length === 1) {
+                        growthChart.data.datasets.push({
+                            label: `${delayYears}년 후 시작`,
+                            data: laterData,
+                            borderColor: '#FF6B6B',
+                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            fill: false,
+                            tension: 0.4,
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            pointBackgroundColor: '#FF6B6B',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4
+                        });
+                        
+                        // 필요 저축액 라인 추가
+                        const targetAsset = nowData[30] * 10000;
+                        const requiredSaving = calculateRequiredMonthlySaving(targetAsset, annualReturn, 30 - delayYears);
+                        const requiredData = years.map(year => {
+                            if (year < delayYears) return 0;
+                            return calculateGrowth(requiredSaving, annualReturn, year - delayYears) / 10000;
+                        });
+                        
+                        growthChart.data.datasets.push({
+                            label: `${delayYears}년 후 시작 (필요 저축액)`,
+                            data: requiredData,
+                            borderColor: '#FF9800',
+                            backgroundColor: 'rgba(255, 152, 0, 0.1)',
+                            fill: false,
+                            tension: 0.4,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#FF9800',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4
+                        });
+                    } else {
+                        // 기존 데이터셋 업데이트
+                        growthChart.data.datasets[1].data = laterData;
+                        growthChart.data.datasets[1].label = `${delayYears}년 후 시작`;
+                        
+                        if (growthChart.data.datasets[2]) {
+                            const targetAsset = nowData[30] * 10000;
+                            const requiredSaving = calculateRequiredMonthlySaving(targetAsset, annualReturn, 30 - delayYears);
+                            const requiredData = years.map(year => {
+                                if (year < delayYears) return 0;
+                                return calculateGrowth(requiredSaving, annualReturn, year - delayYears) / 10000;
+                            });
+                            growthChart.data.datasets[2].data = requiredData;
+                            growthChart.data.datasets[2].label = `${delayYears}년 후 시작 (필요 저축액)`;
+                        }
+                    }
+                } else {
+                    // delayYears가 0이면 추가 라인 제거
+                    growthChart.data.datasets = [growthChart.data.datasets[0]];
+                }
+                
+                growthChart.update();
+            }
+            
+            // 막대 그래프 업데이트
+            if (barChart) {
+                const targetAsset = calculateGrowth(monthlyInvestment, annualReturn, 30);
+                
+                const requiredSavings = [
+                    monthlyInvestment / 10000,
+                    calculateRequiredMonthlySaving(targetAsset, annualReturn, 25) / 10000,
+                    calculateRequiredMonthlySaving(targetAsset, annualReturn, 20) / 10000,
+                    calculateRequiredMonthlySaving(targetAsset, annualReturn, 15) / 10000
+                ];
+                
+                barChart.data.datasets[0].data = requiredSavings;
+                barChart.update();
+            }
+        }
+        
+        // 필요 월 저축액 계산 함수
+        function calculateRequiredMonthlySaving(targetAmount, annualReturn, years) {
+            const monthlyReturn = annualReturn / 12;
+            const months = years * 12;
+            return targetAmount / (((1 + monthlyReturn) ** months - 1) / monthlyReturn);
+        }
+        
         function restartTest() {
             answers = {};
             selectedPurposes = [];
@@ -1507,6 +1949,14 @@
             if (portfolioChart) {
                 portfolioChart.destroy();
                 portfolioChart = null;
+            }
+            if (delayChart) {
+                delayChart.destroy();
+                delayChart = null;
+            }
+            if (barChart) {
+                barChart.destroy();
+                barChart = null;
             }
             
             showScreen('startScreen');
@@ -1604,6 +2054,73 @@
             closeModal();
             // 실제로는 dashboard.html로 이동
             // window.location.href = 'dashboard.html';
+        }
+        
+        // 비교 차트 생성 함수 (막대그래프)
+        function createComparisonChart(annualReturn) {
+            const ctx = document.getElementById('comparisonChart');
+            if (!ctx) return;
+            
+            // 기존 차트가 있다면 제거
+            if (barChart) {
+                barChart.destroy();
+            }
+            
+            const monthlySaving = 500000;
+            const targetAsset = calculateGrowth(monthlySaving, annualReturn, 30);
+            
+            const requiredSavings = [
+                monthlySaving / 10000,
+                calculateRequiredMonthlySaving(targetAsset, annualReturn, 25) / 10000,
+                calculateRequiredMonthlySaving(targetAsset, annualReturn, 20) / 10000,
+                calculateRequiredMonthlySaving(targetAsset, annualReturn, 15) / 10000
+            ];
+            
+            barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['지금 시작', '5년 후', '10년 후', '15년 후'],
+                    datasets: [{
+                        label: '필요 월 저축액',
+                        data: requiredSavings,
+                        backgroundColor: [
+                            '#4A90E2',
+                            '#FF9800', 
+                            '#FF6B6B',
+                            '#E74C3C'
+                        ],
+                        borderWidth: 0,
+                        borderRadius: 8,
+                        barThickness: 60
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return '월 ' + Math.round(context.parsed.y) + '만원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '만원';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         function login() {
