@@ -1,5 +1,6 @@
-2025 서울우먼테크해커톤 본선 제출 작품<br>
 여성의 금융적 사회참여 증진을 위해 금융 및 정책 정보를 제공하고 반값노후 실천을 돕는 프로그램<br>
+---
+
 ![동,시-피치덱-압축됨_page-0001](https://github.com/user-attachments/assets/e7b36410-e67a-45df-84fc-5f04ededec81)
 ![동,시-피치덱-압축됨_page-0012](https://github.com/user-attachments/assets/63935a82-900e-4176-aab2-52c3f90693ae)
 ![동,시-피치덱-압축됨_page-0002](https://github.com/user-attachments/assets/558bec17-073a-4895-ad6e-6e7f4f1bfce4)
