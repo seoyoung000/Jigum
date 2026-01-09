@@ -1,6 +1,7 @@
 2025 서울우먼테크해커톤 본선 제출 작품<br>
 여성의 금융적 사회참여 증진을 위해 금융 및 정책 정보를 제공하고 반값노후 실천을 돕는 프로그램<br>
-
+![동,시-피치덱-압축됨_page-0001](https://github.com/user-attachments/assets/e7b36410-e67a-45df-84fc-5f04ededec81)
+![동,시-피치덱-압축됨_page-0012](https://github.com/user-attachments/assets/63935a82-900e-4176-aab2-52c3f90693ae)
 ![동,시-피치덱-압축됨_page-0001](https://github.com/user-attachments/assets/808b1a8c-4bbb-4ee1-87b9-c48786fc4eb1)
 ![동,시-피치덱-압축됨_page-0002](https://github.com/user-attachments/assets/558bec17-073a-4895-ad6e-6e7f4f1bfce4)
 ![동,시-피치덱-압축됨_page-0003](https://github.com/user-attachments/assets/b5722d84-4d6b-4c74-b6ee-929d1ab250e6)
@@ -12,4 +13,3 @@
 ![동,시-피치덱-압축됨_page-0009](https://github.com/user-attachments/assets/7c0a0512-46d0-4ac6-80fc-9915593d7a70)
 ![동,시-피치덱-압축됨_page-0010](https://github.com/user-attachments/assets/cbc8110e-8569-4540-8d4d-aa281456b7ac)
 ![동,시-피치덱-압축됨_page-0011](https://github.com/user-attachments/assets/aa01ba75-576a-44d4-a45b-2ae422842c9e)
-![동,시-피치덱-압축됨_page-0012](https://github.com/user-attachments/assets/63935a82-900e-4176-aab2-52c3f90693ae)
